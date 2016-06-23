@@ -1,0 +1,1502 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CygnusBiblioTKv2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="APP_GEO_Paises">
+          <Key>
+            <PropertyRef Name="pais_iso" />
+          </Key>
+          <Property Name="pais_iso" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="pais_iso2" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="pais_code" Type="nvarchar" MaxLength="3" />
+          <Property Name="pais_nombre" Type="nvarchar" MaxLength="100" />
+          <Property Name="pais_ingles" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tbl_BiblioTK_Autores">
+          <Key>
+            <PropertyRef Name="autor_uid" />
+          </Key>
+          <Property Name="autor_uid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="autor_cutter" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="autor_nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="autor_apellido_paterno" Type="nvarchar" MaxLength="50" />
+          <Property Name="autor_apellido_materno" Type="nvarchar" MaxLength="50" />
+          <Property Name="autor_año_nacimiento" Type="nvarchar" MaxLength="4" />
+          <Property Name="autor_año_muerte" Type="nvarchar" MaxLength="4" />
+        </EntityType>
+        <EntityType Name="tbl_BiblioTK_Catalogo">
+          <Key>
+            <PropertyRef Name="catalogo_uid" />
+          </Key>
+          <Property Name="catalogo_uid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="class1_id" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="class2_id" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="class3_id" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="class4_id" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="cat_Class_LCC" Type="nvarchar" MaxLength="50" />
+          <Property Name="cat_Class_Decimal" Type="nvarchar" MaxLength="50" />
+          <Property Name="cat_Titulo" Type="nvarchar" MaxLength="150" />
+          <Property Name="cat_SubTitulo" Type="nvarchar" MaxLength="150" />
+          <Property Name="idioma_id" Type="nvarchar" MaxLength="2" />
+          <Property Name="cat_Edicion" Type="nvarchar" MaxLength="20" />
+          <Property Name="cat_Año" Type="nvarchar" MaxLength="4" />
+          <Property Name="cat_Pais" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="Editorial_uid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="cat_Sinopsis" Type="nvarchar(max)" />
+          <Property Name="cat_Upload_Fecha" Type="datetime" />
+          <Property Name="usuario_uid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="cat_Upload_Tipo" Type="nvarchar" MaxLength="10" />
+          <Property Name="cat_Upload_Link" Type="nvarchar" MaxLength="250" />
+          <Property Name="cat_status" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_BiblioTK_Catalogo_Autores">
+          <Key>
+            <PropertyRef Name="catalogo_uid" />
+            <PropertyRef Name="autor_uid" />
+          </Key>
+          <Property Name="catalogo_uid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="autor_uid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="autor_tipo" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_BiblioTK_Catalogo_Temas">
+          <Key>
+            <PropertyRef Name="catalogo_uid" />
+            <PropertyRef Name="tema_uid" />
+          </Key>
+          <Property Name="catalogo_uid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="tema_uid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="tema_orden" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_BiblioTK_class1">
+          <Key>
+            <PropertyRef Name="class1_id" />
+          </Key>
+          <Property Name="class1_id" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="class1_nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_BiblioTK_class2">
+          <Key>
+            <PropertyRef Name="class1_id" />
+            <PropertyRef Name="class2_id" />
+          </Key>
+          <Property Name="class1_id" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="class2_id" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="class2_nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_BiblioTK_class3">
+          <Key>
+            <PropertyRef Name="class1_id" />
+            <PropertyRef Name="class2_id" />
+            <PropertyRef Name="class3_id" />
+          </Key>
+          <Property Name="class1_id" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="class2_id" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="class3_id" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="class3_nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_BiblioTK_class4">
+          <Key>
+            <PropertyRef Name="class1_id" />
+            <PropertyRef Name="class2_id" />
+            <PropertyRef Name="class3_id" />
+            <PropertyRef Name="class4_id" />
+          </Key>
+          <Property Name="class1_id" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="class2_id" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="class3_id" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="class4_id" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="class4_nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_BiblioTK_Donativos">
+          <Key>
+            <PropertyRef Name="donativo_uid" />
+          </Key>
+          <Property Name="donativo_uid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="usuario_uid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="donativo_importe" Type="float" Nullable="false" />
+          <Property Name="donativo_fecha" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_BiblioTK_Editoriales">
+          <Key>
+            <PropertyRef Name="Editorial_UID" />
+          </Key>
+          <Property Name="Editorial_UID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Editorial_Nombre" Type="nchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_BiblioTK_Idiomas">
+          <Key>
+            <PropertyRef Name="idioma_id" />
+          </Key>
+          <Property Name="idioma_id" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="idioma_nombre" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_BiblioTK_Log">
+          <Key>
+            <PropertyRef Name="consulta_uid" />
+          </Key>
+          <Property Name="consulta_uid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="catalogo_uid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="usuario_uid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="consulta_fecha" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_BiblioTK_Temas">
+          <Key>
+            <PropertyRef Name="tema_uid" />
+          </Key>
+          <Property Name="tema_uid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="tema_nombre" Type="nvarchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="tbl_BiblioTK_Votacion">
+          <Key>
+            <PropertyRef Name="voto_uid" />
+            <PropertyRef Name="usuario_uid" />
+            <PropertyRef Name="catalogo_uid" />
+          </Key>
+          <Property Name="voto_uid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="usuario_uid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="catalogo_uid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="voto" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Plantel">
+          <Key>
+            <PropertyRef Name="plantel_uid" />
+          </Key>
+          <Property Name="plantel_uid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="plantel_nombre" Type="nvarchar" MaxLength="200" />
+          <Property Name="plantel_URL" Type="nvarchar" MaxLength="150" />
+          <Property Name="plantel_Facebook" Type="nvarchar" MaxLength="150" />
+          <Property Name="plantel_Twitter" Type="nvarchar" MaxLength="150" />
+          <Property Name="plantel_foto_tipo" Type="nvarchar" MaxLength="3" />
+          <Property Name="plantel_foto" Type="image" />
+          <Property Name="ptest_activo_en_home" Type="bit" />
+          <Property Name="ptest_activo_en_home2" Type="bit" />
+          <Property Name="plantel_siglas" Type="nvarchar" MaxLength="10" />
+          <Property Name="plantel_email" Type="varchar" MaxLength="150" />
+          <Property Name="plantel_theme" Type="smallint" />
+          <Property Name="plantel_avisos_ultima_vez" Type="smalldatetime" />
+          <Property Name="direccion_calle" Type="nvarchar" MaxLength="100" />
+          <Property Name="direccion_num_ext" Type="nvarchar" MaxLength="10" />
+          <Property Name="direccion_num_int" Type="nvarchar" MaxLength="10" />
+          <Property Name="direccion_colonia" Type="nvarchar" MaxLength="100" />
+          <Property Name="direccion_ciudad" Type="nvarchar" MaxLength="100" />
+          <Property Name="direccion_municipio" Type="nvarchar" MaxLength="100" />
+          <Property Name="direccion_entidad" Type="nvarchar" MaxLength="2" />
+          <Property Name="direccion_pais" Type="nvarchar" MaxLength="3" />
+          <Property Name="direccion_CP" Type="nvarchar" MaxLength="10" />
+          <Property Name="direccion_tel1" Type="nvarchar" MaxLength="20" />
+          <Property Name="direccion_tel2" Type="nvarchar" MaxLength="20" />
+          <Property Name="direccion_fax" Type="nvarchar" MaxLength="20" />
+          <Property Name="direccion_movil" Type="nvarchar" MaxLength="20" />
+          <Property Name="google_lat" Type="float" Nullable="false" />
+          <Property Name="google_lng" Type="float" Nullable="false" />
+          <Property Name="google_zoom" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Seguridad_Log">
+          <Key>
+            <PropertyRef Name="log_uid" />
+          </Key>
+          <Property Name="log_uid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="usuario_uid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="usuario_tipo" Type="smallint" Nullable="false" />
+          <Property Name="fecha" Type="datetime" Nullable="false" />
+          <Property Name="mobile" Type="bit" Nullable="false" />
+          <Property Name="ip" Type="nvarchar" MaxLength="50" />
+          <Property Name="browser" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_Seguridad_PWrecovery">
+          <Key>
+            <PropertyRef Name="pw_recovery_uid" />
+          </Key>
+          <Property Name="pw_recovery_uid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="pw_fecha" Type="datetime" Nullable="false" />
+          <Property Name="pw_codigo" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="pw_usuario_uid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="pw_usuario_tipo" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Usuarios">
+          <Key>
+            <PropertyRef Name="usuario_uid" />
+          </Key>
+          <Property Name="usuario_uid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="usuario_tipo" Type="tinyint" />
+          <Property Name="usuario_apellido_paterno" Type="nvarchar" MaxLength="80" />
+          <Property Name="usuario_apellido_materno" Type="nvarchar" MaxLength="80" />
+          <Property Name="usuario_nombre" Type="nvarchar" MaxLength="80" />
+          <Property Name="usuario_sexo" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="usuario_nacimiento" Type="date" Nullable="false" />
+          <Property Name="usuario_nacimiento_pais" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="usuario_foto" Type="image" />
+          <Property Name="usuario_foto_tipo" Type="nvarchar" MaxLength="3" />
+          <Property Name="usuario_email" Type="nvarchar" MaxLength="100" />
+          <Property Name="usuario_password" Type="nvarchar" MaxLength="50" />
+          <Property Name="usuario_status" Type="smallint" Nullable="false" />
+          <Property Name="usuario_fecha_registro" Type="datetime" Nullable="false" />
+          <Property Name="usuario_fecha_ping" Type="datetime" Nullable="false" />
+          <Property Name="admin_cargo" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_tbl_BiblioTK_Catalogo_Autores_tbl_BiblioTK_Autores">
+          <End Role="tbl_BiblioTK_Autores" Type="Self.tbl_BiblioTK_Autores" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_BiblioTK_Catalogo_Autores" Type="Self.tbl_BiblioTK_Catalogo_Autores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_BiblioTK_Autores">
+              <PropertyRef Name="autor_uid" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_Catalogo_Autores">
+              <PropertyRef Name="autor_uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_Catalogo_Autores_tbl_BiblioTK_Catalogo">
+          <End Role="tbl_BiblioTK_Catalogo" Type="Self.tbl_BiblioTK_Catalogo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_BiblioTK_Catalogo_Autores" Type="Self.tbl_BiblioTK_Catalogo_Autores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_BiblioTK_Catalogo">
+              <PropertyRef Name="catalogo_uid" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_Catalogo_Autores">
+              <PropertyRef Name="catalogo_uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_Catalogo_tbl_BiblioTK_class4">
+          <End Role="tbl_BiblioTK_class4" Type="Self.tbl_BiblioTK_class4" Multiplicity="1" />
+          <End Role="tbl_BiblioTK_Catalogo" Type="Self.tbl_BiblioTK_Catalogo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_BiblioTK_class4">
+              <PropertyRef Name="class1_id" />
+              <PropertyRef Name="class2_id" />
+              <PropertyRef Name="class3_id" />
+              <PropertyRef Name="class4_id" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_Catalogo">
+              <PropertyRef Name="class1_id" />
+              <PropertyRef Name="class2_id" />
+              <PropertyRef Name="class3_id" />
+              <PropertyRef Name="class4_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_Catalogo_tbl_BiblioTK_Editoriales">
+          <End Role="tbl_BiblioTK_Editoriales" Type="Self.tbl_BiblioTK_Editoriales" Multiplicity="1" />
+          <End Role="tbl_BiblioTK_Catalogo" Type="Self.tbl_BiblioTK_Catalogo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_BiblioTK_Editoriales">
+              <PropertyRef Name="Editorial_UID" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_Catalogo">
+              <PropertyRef Name="Editorial_uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_Catalogo_tbl_BiblioTK_Idiomas">
+          <End Role="tbl_BiblioTK_Idiomas" Type="Self.tbl_BiblioTK_Idiomas" Multiplicity="0..1" />
+          <End Role="tbl_BiblioTK_Catalogo" Type="Self.tbl_BiblioTK_Catalogo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_BiblioTK_Idiomas">
+              <PropertyRef Name="idioma_id" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_Catalogo">
+              <PropertyRef Name="idioma_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_Catalogo_tbl_Usuarios">
+          <End Role="tbl_Usuarios" Type="Self.tbl_Usuarios" Multiplicity="1" />
+          <End Role="tbl_BiblioTK_Catalogo" Type="Self.tbl_BiblioTK_Catalogo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Usuarios">
+              <PropertyRef Name="usuario_uid" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_Catalogo">
+              <PropertyRef Name="usuario_uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_Catalogo_Temas_tbl_BiblioTK_Catalogo">
+          <End Role="tbl_BiblioTK_Catalogo" Type="Self.tbl_BiblioTK_Catalogo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_BiblioTK_Catalogo_Temas" Type="Self.tbl_BiblioTK_Catalogo_Temas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_BiblioTK_Catalogo">
+              <PropertyRef Name="catalogo_uid" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_Catalogo_Temas">
+              <PropertyRef Name="catalogo_uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_Catalogo_Temas_tbl_BiblioTK_Temas">
+          <End Role="tbl_BiblioTK_Temas" Type="Self.tbl_BiblioTK_Temas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_BiblioTK_Catalogo_Temas" Type="Self.tbl_BiblioTK_Catalogo_Temas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_BiblioTK_Temas">
+              <PropertyRef Name="tema_uid" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_Catalogo_Temas">
+              <PropertyRef Name="tema_uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_class2_tbl_BiblioTK_class1">
+          <End Role="tbl_BiblioTK_class1" Type="Self.tbl_BiblioTK_class1" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_BiblioTK_class2" Type="Self.tbl_BiblioTK_class2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_BiblioTK_class1">
+              <PropertyRef Name="class1_id" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_class2">
+              <PropertyRef Name="class1_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_class3_tbl_BiblioTK_class2">
+          <End Role="tbl_BiblioTK_class2" Type="Self.tbl_BiblioTK_class2" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_BiblioTK_class3" Type="Self.tbl_BiblioTK_class3" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_BiblioTK_class2">
+              <PropertyRef Name="class1_id" />
+              <PropertyRef Name="class2_id" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_class3">
+              <PropertyRef Name="class1_id" />
+              <PropertyRef Name="class2_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_class4_tbl_BiblioTK_class3">
+          <End Role="tbl_BiblioTK_class3" Type="Self.tbl_BiblioTK_class3" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_BiblioTK_class4" Type="Self.tbl_BiblioTK_class4" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_BiblioTK_class3">
+              <PropertyRef Name="class1_id" />
+              <PropertyRef Name="class2_id" />
+              <PropertyRef Name="class3_id" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_class4">
+              <PropertyRef Name="class1_id" />
+              <PropertyRef Name="class2_id" />
+              <PropertyRef Name="class3_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_Donativos_tbl_Usuarios">
+          <End Role="tbl_Usuarios" Type="Self.tbl_Usuarios" Multiplicity="1" />
+          <End Role="tbl_BiblioTK_Donativos" Type="Self.tbl_BiblioTK_Donativos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Usuarios">
+              <PropertyRef Name="usuario_uid" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_Donativos">
+              <PropertyRef Name="usuario_uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_Log_tbl_BiblioTK_Catalogo">
+          <End Role="tbl_BiblioTK_Catalogo" Type="Self.tbl_BiblioTK_Catalogo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_BiblioTK_Log" Type="Self.tbl_BiblioTK_Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_BiblioTK_Catalogo">
+              <PropertyRef Name="catalogo_uid" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_Log">
+              <PropertyRef Name="catalogo_uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_Log_tbl_Usuarios">
+          <End Role="tbl_Usuarios" Type="Self.tbl_Usuarios" Multiplicity="1" />
+          <End Role="tbl_BiblioTK_Log" Type="Self.tbl_BiblioTK_Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Usuarios">
+              <PropertyRef Name="usuario_uid" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_Log">
+              <PropertyRef Name="usuario_uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_Votacion_tbl_BiblioTK_Catalogo">
+          <End Role="tbl_BiblioTK_Catalogo" Type="Self.tbl_BiblioTK_Catalogo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_BiblioTK_Votacion" Type="Self.tbl_BiblioTK_Votacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_BiblioTK_Catalogo">
+              <PropertyRef Name="catalogo_uid" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_Votacion">
+              <PropertyRef Name="catalogo_uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_Votacion_tbl_Usuarios">
+          <End Role="tbl_Usuarios" Type="Self.tbl_Usuarios" Multiplicity="1" />
+          <End Role="tbl_BiblioTK_Votacion" Type="Self.tbl_BiblioTK_Votacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Usuarios">
+              <PropertyRef Name="usuario_uid" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_Votacion">
+              <PropertyRef Name="usuario_uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Seguridad_Log_tbl_Usuarios">
+          <End Role="tbl_Usuarios" Type="Self.tbl_Usuarios" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_Seguridad_Log" Type="Self.tbl_Seguridad_Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Usuarios">
+              <PropertyRef Name="usuario_uid" />
+            </Principal>
+            <Dependent Role="tbl_Seguridad_Log">
+              <PropertyRef Name="usuario_uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Seguridad_PWrecovery_tbl_Usuarios">
+          <End Role="tbl_Usuarios" Type="Self.tbl_Usuarios" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_Seguridad_PWrecovery" Type="Self.tbl_Seguridad_PWrecovery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Usuarios">
+              <PropertyRef Name="usuario_uid" />
+            </Principal>
+            <Dependent Role="tbl_Seguridad_PWrecovery">
+              <PropertyRef Name="pw_usuario_uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Usuarios_APP_GEO_Paises">
+          <End Role="APP_GEO_Paises" Type="Self.APP_GEO_Paises" Multiplicity="1" />
+          <End Role="tbl_Usuarios" Type="Self.tbl_Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APP_GEO_Paises">
+              <PropertyRef Name="pais_iso" />
+            </Principal>
+            <Dependent Role="tbl_Usuarios">
+              <PropertyRef Name="usuario_nacimiento_pais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CygnusBiblioTKv2ModelStoreContainer">
+          <EntitySet Name="APP_GEO_Paises" EntityType="Self.APP_GEO_Paises" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_BiblioTK_Autores" EntityType="Self.tbl_BiblioTK_Autores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_BiblioTK_Catalogo" EntityType="Self.tbl_BiblioTK_Catalogo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_BiblioTK_Catalogo_Autores" EntityType="Self.tbl_BiblioTK_Catalogo_Autores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_BiblioTK_Catalogo_Temas" EntityType="Self.tbl_BiblioTK_Catalogo_Temas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_BiblioTK_class1" EntityType="Self.tbl_BiblioTK_class1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_BiblioTK_class2" EntityType="Self.tbl_BiblioTK_class2" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_BiblioTK_class3" EntityType="Self.tbl_BiblioTK_class3" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_BiblioTK_class4" EntityType="Self.tbl_BiblioTK_class4" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_BiblioTK_Donativos" EntityType="Self.tbl_BiblioTK_Donativos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_BiblioTK_Editoriales" EntityType="Self.tbl_BiblioTK_Editoriales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_BiblioTK_Idiomas" EntityType="Self.tbl_BiblioTK_Idiomas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_BiblioTK_Log" EntityType="Self.tbl_BiblioTK_Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_BiblioTK_Temas" EntityType="Self.tbl_BiblioTK_Temas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_BiblioTK_Votacion" EntityType="Self.tbl_BiblioTK_Votacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Plantel" EntityType="Self.tbl_Plantel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Seguridad_Log" EntityType="Self.tbl_Seguridad_Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Seguridad_PWrecovery" EntityType="Self.tbl_Seguridad_PWrecovery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Usuarios" EntityType="Self.tbl_Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_BiblioTK_Catalogo_Autores_tbl_BiblioTK_Autores" Association="Self.FK_tbl_BiblioTK_Catalogo_Autores_tbl_BiblioTK_Autores">
+            <End Role="tbl_BiblioTK_Autores" EntitySet="tbl_BiblioTK_Autores" />
+            <End Role="tbl_BiblioTK_Catalogo_Autores" EntitySet="tbl_BiblioTK_Catalogo_Autores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_Catalogo_Autores_tbl_BiblioTK_Catalogo" Association="Self.FK_tbl_BiblioTK_Catalogo_Autores_tbl_BiblioTK_Catalogo">
+            <End Role="tbl_BiblioTK_Catalogo" EntitySet="tbl_BiblioTK_Catalogo" />
+            <End Role="tbl_BiblioTK_Catalogo_Autores" EntitySet="tbl_BiblioTK_Catalogo_Autores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_Catalogo_tbl_BiblioTK_class4" Association="Self.FK_tbl_BiblioTK_Catalogo_tbl_BiblioTK_class4">
+            <End Role="tbl_BiblioTK_class4" EntitySet="tbl_BiblioTK_class4" />
+            <End Role="tbl_BiblioTK_Catalogo" EntitySet="tbl_BiblioTK_Catalogo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_Catalogo_tbl_BiblioTK_Editoriales" Association="Self.FK_tbl_BiblioTK_Catalogo_tbl_BiblioTK_Editoriales">
+            <End Role="tbl_BiblioTK_Editoriales" EntitySet="tbl_BiblioTK_Editoriales" />
+            <End Role="tbl_BiblioTK_Catalogo" EntitySet="tbl_BiblioTK_Catalogo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_Catalogo_tbl_BiblioTK_Idiomas" Association="Self.FK_tbl_BiblioTK_Catalogo_tbl_BiblioTK_Idiomas">
+            <End Role="tbl_BiblioTK_Idiomas" EntitySet="tbl_BiblioTK_Idiomas" />
+            <End Role="tbl_BiblioTK_Catalogo" EntitySet="tbl_BiblioTK_Catalogo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_Catalogo_tbl_Usuarios" Association="Self.FK_tbl_BiblioTK_Catalogo_tbl_Usuarios">
+            <End Role="tbl_Usuarios" EntitySet="tbl_Usuarios" />
+            <End Role="tbl_BiblioTK_Catalogo" EntitySet="tbl_BiblioTK_Catalogo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_Catalogo_Temas_tbl_BiblioTK_Catalogo" Association="Self.FK_tbl_BiblioTK_Catalogo_Temas_tbl_BiblioTK_Catalogo">
+            <End Role="tbl_BiblioTK_Catalogo" EntitySet="tbl_BiblioTK_Catalogo" />
+            <End Role="tbl_BiblioTK_Catalogo_Temas" EntitySet="tbl_BiblioTK_Catalogo_Temas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_Catalogo_Temas_tbl_BiblioTK_Temas" Association="Self.FK_tbl_BiblioTK_Catalogo_Temas_tbl_BiblioTK_Temas">
+            <End Role="tbl_BiblioTK_Temas" EntitySet="tbl_BiblioTK_Temas" />
+            <End Role="tbl_BiblioTK_Catalogo_Temas" EntitySet="tbl_BiblioTK_Catalogo_Temas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_class2_tbl_BiblioTK_class1" Association="Self.FK_tbl_BiblioTK_class2_tbl_BiblioTK_class1">
+            <End Role="tbl_BiblioTK_class1" EntitySet="tbl_BiblioTK_class1" />
+            <End Role="tbl_BiblioTK_class2" EntitySet="tbl_BiblioTK_class2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_class3_tbl_BiblioTK_class2" Association="Self.FK_tbl_BiblioTK_class3_tbl_BiblioTK_class2">
+            <End Role="tbl_BiblioTK_class2" EntitySet="tbl_BiblioTK_class2" />
+            <End Role="tbl_BiblioTK_class3" EntitySet="tbl_BiblioTK_class3" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_class4_tbl_BiblioTK_class3" Association="Self.FK_tbl_BiblioTK_class4_tbl_BiblioTK_class3">
+            <End Role="tbl_BiblioTK_class3" EntitySet="tbl_BiblioTK_class3" />
+            <End Role="tbl_BiblioTK_class4" EntitySet="tbl_BiblioTK_class4" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_Donativos_tbl_Usuarios" Association="Self.FK_tbl_BiblioTK_Donativos_tbl_Usuarios">
+            <End Role="tbl_Usuarios" EntitySet="tbl_Usuarios" />
+            <End Role="tbl_BiblioTK_Donativos" EntitySet="tbl_BiblioTK_Donativos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_Log_tbl_BiblioTK_Catalogo" Association="Self.FK_tbl_BiblioTK_Log_tbl_BiblioTK_Catalogo">
+            <End Role="tbl_BiblioTK_Catalogo" EntitySet="tbl_BiblioTK_Catalogo" />
+            <End Role="tbl_BiblioTK_Log" EntitySet="tbl_BiblioTK_Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_Log_tbl_Usuarios" Association="Self.FK_tbl_BiblioTK_Log_tbl_Usuarios">
+            <End Role="tbl_Usuarios" EntitySet="tbl_Usuarios" />
+            <End Role="tbl_BiblioTK_Log" EntitySet="tbl_BiblioTK_Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_Votacion_tbl_BiblioTK_Catalogo" Association="Self.FK_tbl_BiblioTK_Votacion_tbl_BiblioTK_Catalogo">
+            <End Role="tbl_BiblioTK_Catalogo" EntitySet="tbl_BiblioTK_Catalogo" />
+            <End Role="tbl_BiblioTK_Votacion" EntitySet="tbl_BiblioTK_Votacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_Votacion_tbl_Usuarios" Association="Self.FK_tbl_BiblioTK_Votacion_tbl_Usuarios">
+            <End Role="tbl_Usuarios" EntitySet="tbl_Usuarios" />
+            <End Role="tbl_BiblioTK_Votacion" EntitySet="tbl_BiblioTK_Votacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Seguridad_Log_tbl_Usuarios" Association="Self.FK_tbl_Seguridad_Log_tbl_Usuarios">
+            <End Role="tbl_Usuarios" EntitySet="tbl_Usuarios" />
+            <End Role="tbl_Seguridad_Log" EntitySet="tbl_Seguridad_Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Seguridad_PWrecovery_tbl_Usuarios" Association="Self.FK_tbl_Seguridad_PWrecovery_tbl_Usuarios">
+            <End Role="tbl_Usuarios" EntitySet="tbl_Usuarios" />
+            <End Role="tbl_Seguridad_PWrecovery" EntitySet="tbl_Seguridad_PWrecovery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Usuarios_APP_GEO_Paises" Association="Self.FK_tbl_Usuarios_APP_GEO_Paises">
+            <End Role="APP_GEO_Paises" EntitySet="APP_GEO_Paises" />
+            <End Role="tbl_Usuarios" EntitySet="tbl_Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CygnusBiblioTKv2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="APP_GEO_Paises">
+          <Key>
+            <PropertyRef Name="pais_iso" />
+          </Key>
+          <Property Name="pais_iso" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pais_iso2" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pais_code" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="pais_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="pais_ingles" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_Usuarios" Relationship="Self.FK_tbl_Usuarios_APP_GEO_Paises" FromRole="APP_GEO_Paises" ToRole="tbl_Usuarios" />
+        </EntityType>
+        <EntityType Name="tbl_BiblioTK_Autores">
+          <Key>
+            <PropertyRef Name="autor_uid" />
+          </Key>
+          <Property Name="autor_uid" Type="Guid" Nullable="false" />
+          <Property Name="autor_cutter" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="autor_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="autor_apellido_paterno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="autor_apellido_materno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="autor_año_nacimiento" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="autor_año_muerte" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_BiblioTK_Catalogo_Autores" Relationship="Self.FK_tbl_BiblioTK_Catalogo_Autores_tbl_BiblioTK_Autores" FromRole="tbl_BiblioTK_Autores" ToRole="tbl_BiblioTK_Catalogo_Autores" />
+        </EntityType>
+        <EntityType Name="tbl_BiblioTK_Catalogo_Autores">
+          <Key>
+            <PropertyRef Name="catalogo_uid" />
+            <PropertyRef Name="autor_uid" />
+          </Key>
+          <Property Name="catalogo_uid" Type="Guid" Nullable="false" />
+          <Property Name="autor_uid" Type="Guid" Nullable="false" />
+          <Property Name="autor_tipo" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="tbl_BiblioTK_Autores" Relationship="Self.FK_tbl_BiblioTK_Catalogo_Autores_tbl_BiblioTK_Autores" FromRole="tbl_BiblioTK_Catalogo_Autores" ToRole="tbl_BiblioTK_Autores" />
+          <NavigationProperty Name="tbl_BiblioTK_Catalogo" Relationship="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Catalogo_Autores_tbl_BiblioTK_Catalogo" FromRole="tbl_BiblioTK_Catalogo_Autores" ToRole="tbl_BiblioTK_Catalogo" />
+        </EntityType>
+        <EntityType Name="tbl_BiblioTK_Catalogo_Temas">
+          <Key>
+            <PropertyRef Name="catalogo_uid" />
+            <PropertyRef Name="tema_uid" />
+          </Key>
+          <Property Name="catalogo_uid" Type="Guid" Nullable="false" />
+          <Property Name="tema_uid" Type="Guid" Nullable="false" />
+          <Property Name="tema_orden" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="tbl_BiblioTK_Temas" Relationship="Self.FK_tbl_BiblioTK_Catalogo_Temas_tbl_BiblioTK_Temas" FromRole="tbl_BiblioTK_Catalogo_Temas" ToRole="tbl_BiblioTK_Temas" />
+          <NavigationProperty Name="tbl_BiblioTK_Catalogo" Relationship="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Catalogo_Temas_tbl_BiblioTK_Catalogo" FromRole="tbl_BiblioTK_Catalogo_Temas" ToRole="tbl_BiblioTK_Catalogo" />
+        </EntityType>
+        <EntityType Name="tbl_BiblioTK_class1">
+          <Key>
+            <PropertyRef Name="class1_id" />
+          </Key>
+          <Property Name="class1_id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="class1_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbl_BiblioTK_class2" Relationship="Self.FK_tbl_BiblioTK_class2_tbl_BiblioTK_class1" FromRole="tbl_BiblioTK_class1" ToRole="tbl_BiblioTK_class2" />
+        </EntityType>
+        <EntityType Name="tbl_BiblioTK_class2">
+          <Key>
+            <PropertyRef Name="class1_id" />
+            <PropertyRef Name="class2_id" />
+          </Key>
+          <Property Name="class1_id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="class2_id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="class2_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbl_BiblioTK_class1" Relationship="Self.FK_tbl_BiblioTK_class2_tbl_BiblioTK_class1" FromRole="tbl_BiblioTK_class2" ToRole="tbl_BiblioTK_class1" />
+          <NavigationProperty Name="tbl_BiblioTK_class3" Relationship="Self.FK_tbl_BiblioTK_class3_tbl_BiblioTK_class2" FromRole="tbl_BiblioTK_class2" ToRole="tbl_BiblioTK_class3" />
+        </EntityType>
+        <EntityType Name="tbl_BiblioTK_class3">
+          <Key>
+            <PropertyRef Name="class1_id" />
+            <PropertyRef Name="class2_id" />
+            <PropertyRef Name="class3_id" />
+          </Key>
+          <Property Name="class1_id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="class2_id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="class3_id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="class3_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbl_BiblioTK_class2" Relationship="Self.FK_tbl_BiblioTK_class3_tbl_BiblioTK_class2" FromRole="tbl_BiblioTK_class3" ToRole="tbl_BiblioTK_class2" />
+          <NavigationProperty Name="tbl_BiblioTK_class4" Relationship="Self.FK_tbl_BiblioTK_class4_tbl_BiblioTK_class3" FromRole="tbl_BiblioTK_class3" ToRole="tbl_BiblioTK_class4" />
+        </EntityType>
+        <EntityType Name="tbl_BiblioTK_class4">
+          <Key>
+            <PropertyRef Name="class1_id" />
+            <PropertyRef Name="class2_id" />
+            <PropertyRef Name="class3_id" />
+            <PropertyRef Name="class4_id" />
+          </Key>
+          <Property Name="class1_id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="class2_id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="class3_id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="class4_id" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="class4_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbl_BiblioTK_class3" Relationship="Self.FK_tbl_BiblioTK_class4_tbl_BiblioTK_class3" FromRole="tbl_BiblioTK_class4" ToRole="tbl_BiblioTK_class3" />
+          <NavigationProperty Name="tbl_BiblioTK_Catalogo" Relationship="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Catalogo_tbl_BiblioTK_class4" FromRole="tbl_BiblioTK_class4" ToRole="tbl_BiblioTK_Catalogo" />
+        </EntityType>
+        <EntityType Name="tbl_BiblioTK_Donativos">
+          <Key>
+            <PropertyRef Name="donativo_uid" />
+          </Key>
+          <Property Name="donativo_uid" Type="Guid" Nullable="false" />
+          <Property Name="usuario_uid" Type="Guid" Nullable="false" />
+          <Property Name="donativo_importe" Type="Double" Nullable="false" />
+          <Property Name="donativo_fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="tbl_Usuarios" Relationship="Self.FK_tbl_BiblioTK_Donativos_tbl_Usuarios" FromRole="tbl_BiblioTK_Donativos" ToRole="tbl_Usuarios" />
+        </EntityType>
+        <EntityType Name="tbl_BiblioTK_Editoriales">
+          <Key>
+            <PropertyRef Name="Editorial_UID" />
+          </Key>
+          <Property Name="Editorial_UID" Type="Guid" Nullable="false" />
+          <Property Name="Editorial_Nombre" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbl_BiblioTK_Catalogo" Relationship="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Catalogo_tbl_BiblioTK_Editoriales" FromRole="tbl_BiblioTK_Editoriales" ToRole="tbl_BiblioTK_Catalogo" />
+        </EntityType>
+        <EntityType Name="tbl_BiblioTK_Idiomas">
+          <Key>
+            <PropertyRef Name="idioma_id" />
+          </Key>
+          <Property Name="idioma_id" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idioma_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_BiblioTK_Catalogo" Relationship="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Catalogo_tbl_BiblioTK_Idiomas" FromRole="tbl_BiblioTK_Idiomas" ToRole="tbl_BiblioTK_Catalogo" />
+        </EntityType>
+        <EntityType Name="tbl_BiblioTK_Log">
+          <Key>
+            <PropertyRef Name="consulta_uid" />
+          </Key>
+          <Property Name="consulta_uid" Type="Guid" Nullable="false" />
+          <Property Name="catalogo_uid" Type="Guid" Nullable="false" />
+          <Property Name="usuario_uid" Type="Guid" Nullable="false" />
+          <Property Name="consulta_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tbl_Usuarios" Relationship="Self.FK_tbl_BiblioTK_Log_tbl_Usuarios" FromRole="tbl_BiblioTK_Log" ToRole="tbl_Usuarios" />
+          <NavigationProperty Name="tbl_BiblioTK_Catalogo" Relationship="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Log_tbl_BiblioTK_Catalogo" FromRole="tbl_BiblioTK_Log" ToRole="tbl_BiblioTK_Catalogo" />
+        </EntityType>
+        <EntityType Name="tbl_BiblioTK_Temas">
+          <Key>
+            <PropertyRef Name="tema_uid" />
+          </Key>
+          <Property Name="tema_uid" Type="Guid" Nullable="false" />
+          <Property Name="tema_nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_BiblioTK_Catalogo_Temas" Relationship="Self.FK_tbl_BiblioTK_Catalogo_Temas_tbl_BiblioTK_Temas" FromRole="tbl_BiblioTK_Temas" ToRole="tbl_BiblioTK_Catalogo_Temas" />
+        </EntityType>
+        <EntityType Name="tbl_BiblioTK_Votacion">
+          <Key>
+            <PropertyRef Name="voto_uid" />
+            <PropertyRef Name="usuario_uid" />
+            <PropertyRef Name="catalogo_uid" />
+          </Key>
+          <Property Name="voto_uid" Type="Guid" Nullable="false" />
+          <Property Name="usuario_uid" Type="Guid" Nullable="false" />
+          <Property Name="catalogo_uid" Type="Guid" Nullable="false" />
+          <Property Name="voto" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="tbl_Usuarios" Relationship="Self.FK_tbl_BiblioTK_Votacion_tbl_Usuarios" FromRole="tbl_BiblioTK_Votacion" ToRole="tbl_Usuarios" />
+          <NavigationProperty Name="tbl_BiblioTK_Catalogo" Relationship="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Votacion_tbl_BiblioTK_Catalogo" FromRole="tbl_BiblioTK_Votacion" ToRole="tbl_BiblioTK_Catalogo" />
+        </EntityType>
+        <EntityType Name="tbl_Plantel">
+          <Key>
+            <PropertyRef Name="plantel_uid" />
+          </Key>
+          <Property Name="plantel_uid" Type="Guid" Nullable="false" />
+          <Property Name="plantel_nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="plantel_URL" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="plantel_Facebook" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="plantel_Twitter" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="plantel_foto_tipo" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="plantel_foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ptest_activo_en_home" Type="Boolean" />
+          <Property Name="ptest_activo_en_home2" Type="Boolean" />
+          <Property Name="plantel_siglas" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="plantel_email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="plantel_theme" Type="Int16" />
+          <Property Name="plantel_avisos_ultima_vez" Type="DateTime" Precision="0" />
+          <Property Name="direccion_calle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="direccion_num_ext" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="direccion_num_int" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="direccion_colonia" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="direccion_ciudad" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="direccion_municipio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="direccion_entidad" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="direccion_pais" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="direccion_CP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="direccion_tel1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="direccion_tel2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="direccion_fax" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="direccion_movil" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="google_lat" Type="Double" Nullable="false" />
+          <Property Name="google_lng" Type="Double" Nullable="false" />
+          <Property Name="google_zoom" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Seguridad_Log">
+          <Key>
+            <PropertyRef Name="log_uid" />
+          </Key>
+          <Property Name="log_uid" Type="Guid" Nullable="false" />
+          <Property Name="usuario_uid" Type="Guid" Nullable="false" />
+          <Property Name="usuario_tipo" Type="Int16" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="mobile" Type="Boolean" Nullable="false" />
+          <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="browser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_Usuarios" Relationship="Self.FK_tbl_Seguridad_Log_tbl_Usuarios" FromRole="tbl_Seguridad_Log" ToRole="tbl_Usuarios" />
+        </EntityType>
+        <EntityType Name="tbl_Seguridad_PWrecovery">
+          <Key>
+            <PropertyRef Name="pw_recovery_uid" />
+          </Key>
+          <Property Name="pw_recovery_uid" Type="Guid" Nullable="false" />
+          <Property Name="pw_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="pw_codigo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pw_usuario_uid" Type="Guid" Nullable="false" />
+          <Property Name="pw_usuario_tipo" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="tbl_Usuarios" Relationship="Self.FK_tbl_Seguridad_PWrecovery_tbl_Usuarios" FromRole="tbl_Seguridad_PWrecovery" ToRole="tbl_Usuarios" />
+        </EntityType>
+        <EntityType Name="tbl_Usuarios">
+          <Key>
+            <PropertyRef Name="usuario_uid" />
+          </Key>
+          <Property Name="usuario_uid" Type="Guid" Nullable="false" />
+          <Property Name="usuario_tipo" Type="Byte" />
+          <Property Name="usuario_apellido_paterno" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="usuario_apellido_materno" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="usuario_nombre" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="usuario_sexo" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="usuario_nacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="usuario_nacimiento_pais" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="usuario_foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="usuario_foto_tipo" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="usuario_email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="usuario_password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="usuario_status" Type="Int16" Nullable="false" />
+          <Property Name="usuario_fecha_registro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="usuario_fecha_ping" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="admin_cargo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="APP_GEO_Paises" Relationship="Self.FK_tbl_Usuarios_APP_GEO_Paises" FromRole="tbl_Usuarios" ToRole="APP_GEO_Paises" />
+          <NavigationProperty Name="tbl_BiblioTK_Donativos" Relationship="Self.FK_tbl_BiblioTK_Donativos_tbl_Usuarios" FromRole="tbl_Usuarios" ToRole="tbl_BiblioTK_Donativos" />
+          <NavigationProperty Name="tbl_BiblioTK_Log" Relationship="Self.FK_tbl_BiblioTK_Log_tbl_Usuarios" FromRole="tbl_Usuarios" ToRole="tbl_BiblioTK_Log" />
+          <NavigationProperty Name="tbl_BiblioTK_Votacion" Relationship="Self.FK_tbl_BiblioTK_Votacion_tbl_Usuarios" FromRole="tbl_Usuarios" ToRole="tbl_BiblioTK_Votacion" />
+          <NavigationProperty Name="tbl_Seguridad_Log" Relationship="Self.FK_tbl_Seguridad_Log_tbl_Usuarios" FromRole="tbl_Usuarios" ToRole="tbl_Seguridad_Log" />
+          <NavigationProperty Name="tbl_Seguridad_PWrecovery" Relationship="Self.FK_tbl_Seguridad_PWrecovery_tbl_Usuarios" FromRole="tbl_Usuarios" ToRole="tbl_Seguridad_PWrecovery" />
+          <NavigationProperty Name="tbl_BiblioTK_Catalogo" Relationship="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Catalogo_tbl_Usuarios" FromRole="tbl_Usuarios" ToRole="tbl_BiblioTK_Catalogo" />
+        </EntityType>
+        <Association Name="FK_tbl_Usuarios_APP_GEO_Paises">
+          <End Role="APP_GEO_Paises" Type="Self.APP_GEO_Paises" Multiplicity="1" />
+          <End Role="tbl_Usuarios" Type="Self.tbl_Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APP_GEO_Paises">
+              <PropertyRef Name="pais_iso" />
+            </Principal>
+            <Dependent Role="tbl_Usuarios">
+              <PropertyRef Name="usuario_nacimiento_pais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_Catalogo_Autores_tbl_BiblioTK_Autores">
+          <End Role="tbl_BiblioTK_Autores" Type="Self.tbl_BiblioTK_Autores" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_BiblioTK_Catalogo_Autores" Type="Self.tbl_BiblioTK_Catalogo_Autores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_BiblioTK_Autores">
+              <PropertyRef Name="autor_uid" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_Catalogo_Autores">
+              <PropertyRef Name="autor_uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_Catalogo_Temas_tbl_BiblioTK_Temas">
+          <End Role="tbl_BiblioTK_Temas" Type="Self.tbl_BiblioTK_Temas" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_BiblioTK_Catalogo_Temas" Type="Self.tbl_BiblioTK_Catalogo_Temas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_BiblioTK_Temas">
+              <PropertyRef Name="tema_uid" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_Catalogo_Temas">
+              <PropertyRef Name="tema_uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_class2_tbl_BiblioTK_class1">
+          <End Role="tbl_BiblioTK_class1" Type="Self.tbl_BiblioTK_class1" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_BiblioTK_class2" Type="Self.tbl_BiblioTK_class2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_BiblioTK_class1">
+              <PropertyRef Name="class1_id" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_class2">
+              <PropertyRef Name="class1_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_class3_tbl_BiblioTK_class2">
+          <End Role="tbl_BiblioTK_class2" Type="Self.tbl_BiblioTK_class2" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_BiblioTK_class3" Type="Self.tbl_BiblioTK_class3" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_BiblioTK_class2">
+              <PropertyRef Name="class1_id" />
+              <PropertyRef Name="class2_id" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_class3">
+              <PropertyRef Name="class1_id" />
+              <PropertyRef Name="class2_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_class4_tbl_BiblioTK_class3">
+          <End Role="tbl_BiblioTK_class3" Type="Self.tbl_BiblioTK_class3" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_BiblioTK_class4" Type="Self.tbl_BiblioTK_class4" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_BiblioTK_class3">
+              <PropertyRef Name="class1_id" />
+              <PropertyRef Name="class2_id" />
+              <PropertyRef Name="class3_id" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_class4">
+              <PropertyRef Name="class1_id" />
+              <PropertyRef Name="class2_id" />
+              <PropertyRef Name="class3_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_Donativos_tbl_Usuarios">
+          <End Role="tbl_Usuarios" Type="Self.tbl_Usuarios" Multiplicity="1" />
+          <End Role="tbl_BiblioTK_Donativos" Type="Self.tbl_BiblioTK_Donativos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Usuarios">
+              <PropertyRef Name="usuario_uid" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_Donativos">
+              <PropertyRef Name="usuario_uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_Log_tbl_Usuarios">
+          <End Role="tbl_Usuarios" Type="Self.tbl_Usuarios" Multiplicity="1" />
+          <End Role="tbl_BiblioTK_Log" Type="Self.tbl_BiblioTK_Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Usuarios">
+              <PropertyRef Name="usuario_uid" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_Log">
+              <PropertyRef Name="usuario_uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_Votacion_tbl_Usuarios">
+          <End Role="tbl_Usuarios" Type="Self.tbl_Usuarios" Multiplicity="1" />
+          <End Role="tbl_BiblioTK_Votacion" Type="Self.tbl_BiblioTK_Votacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Usuarios">
+              <PropertyRef Name="usuario_uid" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_Votacion">
+              <PropertyRef Name="usuario_uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Seguridad_Log_tbl_Usuarios">
+          <End Role="tbl_Usuarios" Type="Self.tbl_Usuarios" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_Seguridad_Log" Type="Self.tbl_Seguridad_Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Usuarios">
+              <PropertyRef Name="usuario_uid" />
+            </Principal>
+            <Dependent Role="tbl_Seguridad_Log">
+              <PropertyRef Name="usuario_uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Seguridad_PWrecovery_tbl_Usuarios">
+          <End Role="tbl_Usuarios" Type="Self.tbl_Usuarios" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbl_Seguridad_PWrecovery" Type="Self.tbl_Seguridad_PWrecovery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Usuarios">
+              <PropertyRef Name="usuario_uid" />
+            </Principal>
+            <Dependent Role="tbl_Seguridad_PWrecovery">
+              <PropertyRef Name="pw_usuario_uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="APP_GEO_Paises" EntityType="Self.APP_GEO_Paises" />
+          <EntitySet Name="tbl_BiblioTK_Autores" EntityType="Self.tbl_BiblioTK_Autores" />
+          <EntitySet Name="tbl_BiblioTK_Catalogo_Autores" EntityType="Self.tbl_BiblioTK_Catalogo_Autores" />
+          <EntitySet Name="tbl_BiblioTK_Catalogo_Temas" EntityType="Self.tbl_BiblioTK_Catalogo_Temas" />
+          <EntitySet Name="tbl_BiblioTK_class1" EntityType="Self.tbl_BiblioTK_class1" />
+          <EntitySet Name="tbl_BiblioTK_class2" EntityType="Self.tbl_BiblioTK_class2" />
+          <EntitySet Name="tbl_BiblioTK_class3" EntityType="Self.tbl_BiblioTK_class3" />
+          <EntitySet Name="tbl_BiblioTK_class4" EntityType="Self.tbl_BiblioTK_class4" />
+          <EntitySet Name="tbl_BiblioTK_Donativos" EntityType="Self.tbl_BiblioTK_Donativos" />
+          <EntitySet Name="tbl_BiblioTK_Editoriales" EntityType="Self.tbl_BiblioTK_Editoriales" />
+          <EntitySet Name="tbl_BiblioTK_Idiomas" EntityType="Self.tbl_BiblioTK_Idiomas" />
+          <EntitySet Name="tbl_BiblioTK_Log" EntityType="Self.tbl_BiblioTK_Log" />
+          <EntitySet Name="tbl_BiblioTK_Temas" EntityType="Self.tbl_BiblioTK_Temas" />
+          <EntitySet Name="tbl_BiblioTK_Votacion" EntityType="Self.tbl_BiblioTK_Votacion" />
+          <EntitySet Name="tbl_Plantel" EntityType="Self.tbl_Plantel" />
+          <EntitySet Name="tbl_Seguridad_Log" EntityType="Self.tbl_Seguridad_Log" />
+          <EntitySet Name="tbl_Seguridad_PWrecovery" EntityType="Self.tbl_Seguridad_PWrecovery" />
+          <EntitySet Name="tbl_Usuarios" EntityType="Self.tbl_Usuarios" />
+          <AssociationSet Name="FK_tbl_Usuarios_APP_GEO_Paises" Association="Self.FK_tbl_Usuarios_APP_GEO_Paises">
+            <End Role="APP_GEO_Paises" EntitySet="APP_GEO_Paises" />
+            <End Role="tbl_Usuarios" EntitySet="tbl_Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_Catalogo_Autores_tbl_BiblioTK_Autores" Association="Self.FK_tbl_BiblioTK_Catalogo_Autores_tbl_BiblioTK_Autores">
+            <End Role="tbl_BiblioTK_Autores" EntitySet="tbl_BiblioTK_Autores" />
+            <End Role="tbl_BiblioTK_Catalogo_Autores" EntitySet="tbl_BiblioTK_Catalogo_Autores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_Catalogo_Temas_tbl_BiblioTK_Temas" Association="Self.FK_tbl_BiblioTK_Catalogo_Temas_tbl_BiblioTK_Temas">
+            <End Role="tbl_BiblioTK_Temas" EntitySet="tbl_BiblioTK_Temas" />
+            <End Role="tbl_BiblioTK_Catalogo_Temas" EntitySet="tbl_BiblioTK_Catalogo_Temas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_class2_tbl_BiblioTK_class1" Association="Self.FK_tbl_BiblioTK_class2_tbl_BiblioTK_class1">
+            <End Role="tbl_BiblioTK_class1" EntitySet="tbl_BiblioTK_class1" />
+            <End Role="tbl_BiblioTK_class2" EntitySet="tbl_BiblioTK_class2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_class3_tbl_BiblioTK_class2" Association="Self.FK_tbl_BiblioTK_class3_tbl_BiblioTK_class2">
+            <End Role="tbl_BiblioTK_class2" EntitySet="tbl_BiblioTK_class2" />
+            <End Role="tbl_BiblioTK_class3" EntitySet="tbl_BiblioTK_class3" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_class4_tbl_BiblioTK_class3" Association="Self.FK_tbl_BiblioTK_class4_tbl_BiblioTK_class3">
+            <End Role="tbl_BiblioTK_class3" EntitySet="tbl_BiblioTK_class3" />
+            <End Role="tbl_BiblioTK_class4" EntitySet="tbl_BiblioTK_class4" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_Donativos_tbl_Usuarios" Association="Self.FK_tbl_BiblioTK_Donativos_tbl_Usuarios">
+            <End Role="tbl_Usuarios" EntitySet="tbl_Usuarios" />
+            <End Role="tbl_BiblioTK_Donativos" EntitySet="tbl_BiblioTK_Donativos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_Log_tbl_Usuarios" Association="Self.FK_tbl_BiblioTK_Log_tbl_Usuarios">
+            <End Role="tbl_Usuarios" EntitySet="tbl_Usuarios" />
+            <End Role="tbl_BiblioTK_Log" EntitySet="tbl_BiblioTK_Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_Votacion_tbl_Usuarios" Association="Self.FK_tbl_BiblioTK_Votacion_tbl_Usuarios">
+            <End Role="tbl_Usuarios" EntitySet="tbl_Usuarios" />
+            <End Role="tbl_BiblioTK_Votacion" EntitySet="tbl_BiblioTK_Votacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Seguridad_Log_tbl_Usuarios" Association="Self.FK_tbl_Seguridad_Log_tbl_Usuarios">
+            <End Role="tbl_Usuarios" EntitySet="tbl_Usuarios" />
+            <End Role="tbl_Seguridad_Log" EntitySet="tbl_Seguridad_Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Seguridad_PWrecovery_tbl_Usuarios" Association="Self.FK_tbl_Seguridad_PWrecovery_tbl_Usuarios">
+            <End Role="tbl_Usuarios" EntitySet="tbl_Usuarios" />
+            <End Role="tbl_Seguridad_PWrecovery" EntitySet="tbl_Seguridad_PWrecovery" />
+          </AssociationSet>
+          <EntitySet Name="tbl_BiblioTK_Catalogo" EntityType="CygnusBiblioTKv2Model.tbl_BiblioTK_Catalogo" />
+          <AssociationSet Name="FK_tbl_BiblioTK_Catalogo_Autores_tbl_BiblioTK_Catalogo" Association="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Catalogo_Autores_tbl_BiblioTK_Catalogo">
+            <End Role="tbl_BiblioTK_Catalogo" EntitySet="tbl_BiblioTK_Catalogo" />
+            <End Role="tbl_BiblioTK_Catalogo_Autores" EntitySet="tbl_BiblioTK_Catalogo_Autores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_Catalogo_tbl_BiblioTK_class4" Association="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Catalogo_tbl_BiblioTK_class4">
+            <End Role="tbl_BiblioTK_class4" EntitySet="tbl_BiblioTK_class4" />
+            <End Role="tbl_BiblioTK_Catalogo" EntitySet="tbl_BiblioTK_Catalogo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_Catalogo_tbl_BiblioTK_Editoriales" Association="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Catalogo_tbl_BiblioTK_Editoriales">
+            <End Role="tbl_BiblioTK_Editoriales" EntitySet="tbl_BiblioTK_Editoriales" />
+            <End Role="tbl_BiblioTK_Catalogo" EntitySet="tbl_BiblioTK_Catalogo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_Catalogo_tbl_BiblioTK_Idiomas" Association="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Catalogo_tbl_BiblioTK_Idiomas">
+            <End Role="tbl_BiblioTK_Idiomas" EntitySet="tbl_BiblioTK_Idiomas" />
+            <End Role="tbl_BiblioTK_Catalogo" EntitySet="tbl_BiblioTK_Catalogo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_Catalogo_tbl_Usuarios" Association="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Catalogo_tbl_Usuarios">
+            <End Role="tbl_Usuarios" EntitySet="tbl_Usuarios" />
+            <End Role="tbl_BiblioTK_Catalogo" EntitySet="tbl_BiblioTK_Catalogo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_Catalogo_Temas_tbl_BiblioTK_Catalogo" Association="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Catalogo_Temas_tbl_BiblioTK_Catalogo">
+            <End Role="tbl_BiblioTK_Catalogo" EntitySet="tbl_BiblioTK_Catalogo" />
+            <End Role="tbl_BiblioTK_Catalogo_Temas" EntitySet="tbl_BiblioTK_Catalogo_Temas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_Log_tbl_BiblioTK_Catalogo" Association="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Log_tbl_BiblioTK_Catalogo">
+            <End Role="tbl_BiblioTK_Catalogo" EntitySet="tbl_BiblioTK_Catalogo" />
+            <End Role="tbl_BiblioTK_Log" EntitySet="tbl_BiblioTK_Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_BiblioTK_Votacion_tbl_BiblioTK_Catalogo" Association="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Votacion_tbl_BiblioTK_Catalogo">
+            <End Role="tbl_BiblioTK_Catalogo" EntitySet="tbl_BiblioTK_Catalogo" />
+            <End Role="tbl_BiblioTK_Votacion" EntitySet="tbl_BiblioTK_Votacion" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tbl_BiblioTK_Catalogo">
+          <Key>
+            <PropertyRef Name="catalogo_uid" />
+          </Key>
+          <Property Name="catalogo_uid" Type="Guid" Nullable="false" />
+          <Property Name="class1_id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="class2_id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="class3_id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="class4_id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="cat_Class_LCC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cat_Class_Decimal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cat_Titulo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="cat_SubTitulo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="idioma_id" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="cat_Edicion" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="cat_Año" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="cat_Pais" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="Editorial_uid" Type="Guid" Nullable="false" />
+          <Property Name="cat_Sinopsis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="cat_Upload_Fecha" Type="DateTime" Precision="3" />
+          <Property Name="usuario_uid" Type="Guid" Nullable="false" />
+          <Property Name="cat_Upload_Tipo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="cat_Upload_Link" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="cat_status" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="tbl_BiblioTK_Catalogo_Autores" Relationship="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Catalogo_Autores_tbl_BiblioTK_Catalogo" FromRole="tbl_BiblioTK_Catalogo" ToRole="tbl_BiblioTK_Catalogo_Autores" />
+          <NavigationProperty Name="tbl_BiblioTK_class4" Relationship="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Catalogo_tbl_BiblioTK_class4" FromRole="tbl_BiblioTK_Catalogo" ToRole="tbl_BiblioTK_class4" />
+          <NavigationProperty Name="tbl_BiblioTK_Editoriales" Relationship="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Catalogo_tbl_BiblioTK_Editoriales" FromRole="tbl_BiblioTK_Catalogo" ToRole="tbl_BiblioTK_Editoriales" />
+          <NavigationProperty Name="tbl_BiblioTK_Idiomas" Relationship="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Catalogo_tbl_BiblioTK_Idiomas" FromRole="tbl_BiblioTK_Catalogo" ToRole="tbl_BiblioTK_Idiomas" />
+          <NavigationProperty Name="tbl_Usuarios" Relationship="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Catalogo_tbl_Usuarios" FromRole="tbl_BiblioTK_Catalogo" ToRole="tbl_Usuarios" />
+          <NavigationProperty Name="tbl_BiblioTK_Catalogo_Temas" Relationship="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Catalogo_Temas_tbl_BiblioTK_Catalogo" FromRole="tbl_BiblioTK_Catalogo" ToRole="tbl_BiblioTK_Catalogo_Temas" />
+          <NavigationProperty Name="tbl_BiblioTK_Log" Relationship="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Log_tbl_BiblioTK_Catalogo" FromRole="tbl_BiblioTK_Catalogo" ToRole="tbl_BiblioTK_Log" />
+          <NavigationProperty Name="tbl_BiblioTK_Votacion" Relationship="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Votacion_tbl_BiblioTK_Catalogo" FromRole="tbl_BiblioTK_Catalogo" ToRole="tbl_BiblioTK_Votacion" />
+        </EntityType>
+        <Association Name="FK_tbl_BiblioTK_Catalogo_Autores_tbl_BiblioTK_Catalogo">
+          <End Type="CygnusBiblioTKv2Model.tbl_BiblioTK_Catalogo" Role="tbl_BiblioTK_Catalogo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="CygnusBiblioTKv2Model.tbl_BiblioTK_Catalogo_Autores" Role="tbl_BiblioTK_Catalogo_Autores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_BiblioTK_Catalogo">
+              <PropertyRef Name="catalogo_uid" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_Catalogo_Autores">
+              <PropertyRef Name="catalogo_uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_Catalogo_tbl_BiblioTK_class4">
+          <End Type="CygnusBiblioTKv2Model.tbl_BiblioTK_class4" Role="tbl_BiblioTK_class4" Multiplicity="1" />
+          <End Type="CygnusBiblioTKv2Model.tbl_BiblioTK_Catalogo" Role="tbl_BiblioTK_Catalogo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_BiblioTK_class4">
+              <PropertyRef Name="class1_id" />
+              <PropertyRef Name="class2_id" />
+              <PropertyRef Name="class3_id" />
+              <PropertyRef Name="class4_id" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_Catalogo">
+              <PropertyRef Name="class1_id" />
+              <PropertyRef Name="class2_id" />
+              <PropertyRef Name="class3_id" />
+              <PropertyRef Name="class4_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_Catalogo_tbl_BiblioTK_Editoriales">
+          <End Type="CygnusBiblioTKv2Model.tbl_BiblioTK_Editoriales" Role="tbl_BiblioTK_Editoriales" Multiplicity="1" />
+          <End Type="CygnusBiblioTKv2Model.tbl_BiblioTK_Catalogo" Role="tbl_BiblioTK_Catalogo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_BiblioTK_Editoriales">
+              <PropertyRef Name="Editorial_UID" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_Catalogo">
+              <PropertyRef Name="Editorial_uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_Catalogo_tbl_BiblioTK_Idiomas">
+          <End Type="CygnusBiblioTKv2Model.tbl_BiblioTK_Idiomas" Role="tbl_BiblioTK_Idiomas" Multiplicity="0..1" />
+          <End Type="CygnusBiblioTKv2Model.tbl_BiblioTK_Catalogo" Role="tbl_BiblioTK_Catalogo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_BiblioTK_Idiomas">
+              <PropertyRef Name="idioma_id" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_Catalogo">
+              <PropertyRef Name="idioma_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_Catalogo_tbl_Usuarios">
+          <End Type="CygnusBiblioTKv2Model.tbl_Usuarios" Role="tbl_Usuarios" Multiplicity="1" />
+          <End Type="CygnusBiblioTKv2Model.tbl_BiblioTK_Catalogo" Role="tbl_BiblioTK_Catalogo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Usuarios">
+              <PropertyRef Name="usuario_uid" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_Catalogo">
+              <PropertyRef Name="usuario_uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_Catalogo_Temas_tbl_BiblioTK_Catalogo">
+          <End Type="CygnusBiblioTKv2Model.tbl_BiblioTK_Catalogo" Role="tbl_BiblioTK_Catalogo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="CygnusBiblioTKv2Model.tbl_BiblioTK_Catalogo_Temas" Role="tbl_BiblioTK_Catalogo_Temas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_BiblioTK_Catalogo">
+              <PropertyRef Name="catalogo_uid" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_Catalogo_Temas">
+              <PropertyRef Name="catalogo_uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_Log_tbl_BiblioTK_Catalogo">
+          <End Type="CygnusBiblioTKv2Model.tbl_BiblioTK_Catalogo" Role="tbl_BiblioTK_Catalogo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="CygnusBiblioTKv2Model.tbl_BiblioTK_Log" Role="tbl_BiblioTK_Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_BiblioTK_Catalogo">
+              <PropertyRef Name="catalogo_uid" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_Log">
+              <PropertyRef Name="catalogo_uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_BiblioTK_Votacion_tbl_BiblioTK_Catalogo">
+          <End Type="CygnusBiblioTKv2Model.tbl_BiblioTK_Catalogo" Role="tbl_BiblioTK_Catalogo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="CygnusBiblioTKv2Model.tbl_BiblioTK_Votacion" Role="tbl_BiblioTK_Votacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_BiblioTK_Catalogo">
+              <PropertyRef Name="catalogo_uid" />
+            </Principal>
+            <Dependent Role="tbl_BiblioTK_Votacion">
+              <PropertyRef Name="catalogo_uid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CygnusBiblioTKv2ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="APP_GEO_Paises">
+            <EntityTypeMapping TypeName="CygnusBiblioTKv2Model.APP_GEO_Paises">
+              <MappingFragment StoreEntitySet="APP_GEO_Paises">
+                <ScalarProperty Name="pais_iso" ColumnName="pais_iso" />
+                <ScalarProperty Name="pais_iso2" ColumnName="pais_iso2" />
+                <ScalarProperty Name="pais_code" ColumnName="pais_code" />
+                <ScalarProperty Name="pais_nombre" ColumnName="pais_nombre" />
+                <ScalarProperty Name="pais_ingles" ColumnName="pais_ingles" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_BiblioTK_Autores">
+            <EntityTypeMapping TypeName="CygnusBiblioTKv2Model.tbl_BiblioTK_Autores">
+              <MappingFragment StoreEntitySet="tbl_BiblioTK_Autores">
+                <ScalarProperty Name="autor_uid" ColumnName="autor_uid" />
+                <ScalarProperty Name="autor_cutter" ColumnName="autor_cutter" />
+                <ScalarProperty Name="autor_nombre" ColumnName="autor_nombre" />
+                <ScalarProperty Name="autor_apellido_paterno" ColumnName="autor_apellido_paterno" />
+                <ScalarProperty Name="autor_apellido_materno" ColumnName="autor_apellido_materno" />
+                <ScalarProperty Name="autor_año_nacimiento" ColumnName="autor_año_nacimiento" />
+                <ScalarProperty Name="autor_año_muerte" ColumnName="autor_año_muerte" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_BiblioTK_Catalogo_Autores">
+            <EntityTypeMapping TypeName="CygnusBiblioTKv2Model.tbl_BiblioTK_Catalogo_Autores">
+              <MappingFragment StoreEntitySet="tbl_BiblioTK_Catalogo_Autores">
+                <ScalarProperty Name="catalogo_uid" ColumnName="catalogo_uid" />
+                <ScalarProperty Name="autor_uid" ColumnName="autor_uid" />
+                <ScalarProperty Name="autor_tipo" ColumnName="autor_tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_BiblioTK_Catalogo_Temas">
+            <EntityTypeMapping TypeName="CygnusBiblioTKv2Model.tbl_BiblioTK_Catalogo_Temas">
+              <MappingFragment StoreEntitySet="tbl_BiblioTK_Catalogo_Temas">
+                <ScalarProperty Name="catalogo_uid" ColumnName="catalogo_uid" />
+                <ScalarProperty Name="tema_uid" ColumnName="tema_uid" />
+                <ScalarProperty Name="tema_orden" ColumnName="tema_orden" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_BiblioTK_class1">
+            <EntityTypeMapping TypeName="CygnusBiblioTKv2Model.tbl_BiblioTK_class1">
+              <MappingFragment StoreEntitySet="tbl_BiblioTK_class1">
+                <ScalarProperty Name="class1_id" ColumnName="class1_id" />
+                <ScalarProperty Name="class1_nombre" ColumnName="class1_nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_BiblioTK_class2">
+            <EntityTypeMapping TypeName="CygnusBiblioTKv2Model.tbl_BiblioTK_class2">
+              <MappingFragment StoreEntitySet="tbl_BiblioTK_class2">
+                <ScalarProperty Name="class1_id" ColumnName="class1_id" />
+                <ScalarProperty Name="class2_id" ColumnName="class2_id" />
+                <ScalarProperty Name="class2_nombre" ColumnName="class2_nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_BiblioTK_class3">
+            <EntityTypeMapping TypeName="CygnusBiblioTKv2Model.tbl_BiblioTK_class3">
+              <MappingFragment StoreEntitySet="tbl_BiblioTK_class3">
+                <ScalarProperty Name="class1_id" ColumnName="class1_id" />
+                <ScalarProperty Name="class2_id" ColumnName="class2_id" />
+                <ScalarProperty Name="class3_id" ColumnName="class3_id" />
+                <ScalarProperty Name="class3_nombre" ColumnName="class3_nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_BiblioTK_class4">
+            <EntityTypeMapping TypeName="CygnusBiblioTKv2Model.tbl_BiblioTK_class4">
+              <MappingFragment StoreEntitySet="tbl_BiblioTK_class4">
+                <ScalarProperty Name="class1_id" ColumnName="class1_id" />
+                <ScalarProperty Name="class2_id" ColumnName="class2_id" />
+                <ScalarProperty Name="class3_id" ColumnName="class3_id" />
+                <ScalarProperty Name="class4_id" ColumnName="class4_id" />
+                <ScalarProperty Name="class4_nombre" ColumnName="class4_nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_BiblioTK_Donativos">
+            <EntityTypeMapping TypeName="CygnusBiblioTKv2Model.tbl_BiblioTK_Donativos">
+              <MappingFragment StoreEntitySet="tbl_BiblioTK_Donativos">
+                <ScalarProperty Name="donativo_uid" ColumnName="donativo_uid" />
+                <ScalarProperty Name="usuario_uid" ColumnName="usuario_uid" />
+                <ScalarProperty Name="donativo_importe" ColumnName="donativo_importe" />
+                <ScalarProperty Name="donativo_fecha" ColumnName="donativo_fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_BiblioTK_Editoriales">
+            <EntityTypeMapping TypeName="CygnusBiblioTKv2Model.tbl_BiblioTK_Editoriales">
+              <MappingFragment StoreEntitySet="tbl_BiblioTK_Editoriales">
+                <ScalarProperty Name="Editorial_UID" ColumnName="Editorial_UID" />
+                <ScalarProperty Name="Editorial_Nombre" ColumnName="Editorial_Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_BiblioTK_Idiomas">
+            <EntityTypeMapping TypeName="CygnusBiblioTKv2Model.tbl_BiblioTK_Idiomas">
+              <MappingFragment StoreEntitySet="tbl_BiblioTK_Idiomas">
+                <ScalarProperty Name="idioma_id" ColumnName="idioma_id" />
+                <ScalarProperty Name="idioma_nombre" ColumnName="idioma_nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_BiblioTK_Log">
+            <EntityTypeMapping TypeName="CygnusBiblioTKv2Model.tbl_BiblioTK_Log">
+              <MappingFragment StoreEntitySet="tbl_BiblioTK_Log">
+                <ScalarProperty Name="consulta_uid" ColumnName="consulta_uid" />
+                <ScalarProperty Name="catalogo_uid" ColumnName="catalogo_uid" />
+                <ScalarProperty Name="usuario_uid" ColumnName="usuario_uid" />
+                <ScalarProperty Name="consulta_fecha" ColumnName="consulta_fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_BiblioTK_Temas">
+            <EntityTypeMapping TypeName="CygnusBiblioTKv2Model.tbl_BiblioTK_Temas">
+              <MappingFragment StoreEntitySet="tbl_BiblioTK_Temas">
+                <ScalarProperty Name="tema_uid" ColumnName="tema_uid" />
+                <ScalarProperty Name="tema_nombre" ColumnName="tema_nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_BiblioTK_Votacion">
+            <EntityTypeMapping TypeName="CygnusBiblioTKv2Model.tbl_BiblioTK_Votacion">
+              <MappingFragment StoreEntitySet="tbl_BiblioTK_Votacion">
+                <ScalarProperty Name="voto_uid" ColumnName="voto_uid" />
+                <ScalarProperty Name="usuario_uid" ColumnName="usuario_uid" />
+                <ScalarProperty Name="catalogo_uid" ColumnName="catalogo_uid" />
+                <ScalarProperty Name="voto" ColumnName="voto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Plantel">
+            <EntityTypeMapping TypeName="CygnusBiblioTKv2Model.tbl_Plantel">
+              <MappingFragment StoreEntitySet="tbl_Plantel">
+                <ScalarProperty Name="plantel_uid" ColumnName="plantel_uid" />
+                <ScalarProperty Name="plantel_nombre" ColumnName="plantel_nombre" />
+                <ScalarProperty Name="plantel_URL" ColumnName="plantel_URL" />
+                <ScalarProperty Name="plantel_Facebook" ColumnName="plantel_Facebook" />
+                <ScalarProperty Name="plantel_Twitter" ColumnName="plantel_Twitter" />
+                <ScalarProperty Name="plantel_foto_tipo" ColumnName="plantel_foto_tipo" />
+                <ScalarProperty Name="plantel_foto" ColumnName="plantel_foto" />
+                <ScalarProperty Name="ptest_activo_en_home" ColumnName="ptest_activo_en_home" />
+                <ScalarProperty Name="ptest_activo_en_home2" ColumnName="ptest_activo_en_home2" />
+                <ScalarProperty Name="plantel_siglas" ColumnName="plantel_siglas" />
+                <ScalarProperty Name="plantel_email" ColumnName="plantel_email" />
+                <ScalarProperty Name="plantel_theme" ColumnName="plantel_theme" />
+                <ScalarProperty Name="plantel_avisos_ultima_vez" ColumnName="plantel_avisos_ultima_vez" />
+                <ScalarProperty Name="direccion_calle" ColumnName="direccion_calle" />
+                <ScalarProperty Name="direccion_num_ext" ColumnName="direccion_num_ext" />
+                <ScalarProperty Name="direccion_num_int" ColumnName="direccion_num_int" />
+                <ScalarProperty Name="direccion_colonia" ColumnName="direccion_colonia" />
+                <ScalarProperty Name="direccion_ciudad" ColumnName="direccion_ciudad" />
+                <ScalarProperty Name="direccion_municipio" ColumnName="direccion_municipio" />
+                <ScalarProperty Name="direccion_entidad" ColumnName="direccion_entidad" />
+                <ScalarProperty Name="direccion_pais" ColumnName="direccion_pais" />
+                <ScalarProperty Name="direccion_CP" ColumnName="direccion_CP" />
+                <ScalarProperty Name="direccion_tel1" ColumnName="direccion_tel1" />
+                <ScalarProperty Name="direccion_tel2" ColumnName="direccion_tel2" />
+                <ScalarProperty Name="direccion_fax" ColumnName="direccion_fax" />
+                <ScalarProperty Name="direccion_movil" ColumnName="direccion_movil" />
+                <ScalarProperty Name="google_lat" ColumnName="google_lat" />
+                <ScalarProperty Name="google_lng" ColumnName="google_lng" />
+                <ScalarProperty Name="google_zoom" ColumnName="google_zoom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Seguridad_Log">
+            <EntityTypeMapping TypeName="CygnusBiblioTKv2Model.tbl_Seguridad_Log">
+              <MappingFragment StoreEntitySet="tbl_Seguridad_Log">
+                <ScalarProperty Name="log_uid" ColumnName="log_uid" />
+                <ScalarProperty Name="usuario_uid" ColumnName="usuario_uid" />
+                <ScalarProperty Name="usuario_tipo" ColumnName="usuario_tipo" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="browser" ColumnName="browser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Seguridad_PWrecovery">
+            <EntityTypeMapping TypeName="CygnusBiblioTKv2Model.tbl_Seguridad_PWrecovery">
+              <MappingFragment StoreEntitySet="tbl_Seguridad_PWrecovery">
+                <ScalarProperty Name="pw_recovery_uid" ColumnName="pw_recovery_uid" />
+                <ScalarProperty Name="pw_fecha" ColumnName="pw_fecha" />
+                <ScalarProperty Name="pw_codigo" ColumnName="pw_codigo" />
+                <ScalarProperty Name="pw_usuario_uid" ColumnName="pw_usuario_uid" />
+                <ScalarProperty Name="pw_usuario_tipo" ColumnName="pw_usuario_tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Usuarios">
+            <EntityTypeMapping TypeName="CygnusBiblioTKv2Model.tbl_Usuarios">
+              <MappingFragment StoreEntitySet="tbl_Usuarios">
+                <ScalarProperty Name="usuario_uid" ColumnName="usuario_uid" />
+                <ScalarProperty Name="usuario_tipo" ColumnName="usuario_tipo" />
+                <ScalarProperty Name="usuario_apellido_paterno" ColumnName="usuario_apellido_paterno" />
+                <ScalarProperty Name="usuario_apellido_materno" ColumnName="usuario_apellido_materno" />
+                <ScalarProperty Name="usuario_nombre" ColumnName="usuario_nombre" />
+                <ScalarProperty Name="usuario_sexo" ColumnName="usuario_sexo" />
+                <ScalarProperty Name="usuario_nacimiento" ColumnName="usuario_nacimiento" />
+                <ScalarProperty Name="usuario_nacimiento_pais" ColumnName="usuario_nacimiento_pais" />
+                <ScalarProperty Name="usuario_foto" ColumnName="usuario_foto" />
+                <ScalarProperty Name="usuario_foto_tipo" ColumnName="usuario_foto_tipo" />
+                <ScalarProperty Name="usuario_email" ColumnName="usuario_email" />
+                <ScalarProperty Name="usuario_password" ColumnName="usuario_password" />
+                <ScalarProperty Name="usuario_status" ColumnName="usuario_status" />
+                <ScalarProperty Name="usuario_fecha_registro" ColumnName="usuario_fecha_registro" />
+                <ScalarProperty Name="usuario_fecha_ping" ColumnName="usuario_fecha_ping" />
+                <ScalarProperty Name="admin_cargo" ColumnName="admin_cargo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_BiblioTK_Catalogo">
+            <EntityTypeMapping TypeName="CygnusBiblioTKv2Model.tbl_BiblioTK_Catalogo">
+              <MappingFragment StoreEntitySet="tbl_BiblioTK_Catalogo">
+                <ScalarProperty Name="cat_status" ColumnName="cat_status" />
+                <ScalarProperty Name="cat_Upload_Link" ColumnName="cat_Upload_Link" />
+                <ScalarProperty Name="cat_Upload_Tipo" ColumnName="cat_Upload_Tipo" />
+                <ScalarProperty Name="usuario_uid" ColumnName="usuario_uid" />
+                <ScalarProperty Name="cat_Upload_Fecha" ColumnName="cat_Upload_Fecha" />
+                <ScalarProperty Name="cat_Sinopsis" ColumnName="cat_Sinopsis" />
+                <ScalarProperty Name="Editorial_uid" ColumnName="Editorial_uid" />
+                <ScalarProperty Name="cat_Pais" ColumnName="cat_Pais" />
+                <ScalarProperty Name="cat_Año" ColumnName="cat_Año" />
+                <ScalarProperty Name="cat_Edicion" ColumnName="cat_Edicion" />
+                <ScalarProperty Name="idioma_id" ColumnName="idioma_id" />
+                <ScalarProperty Name="cat_SubTitulo" ColumnName="cat_SubTitulo" />
+                <ScalarProperty Name="cat_Titulo" ColumnName="cat_Titulo" />
+                <ScalarProperty Name="cat_Class_Decimal" ColumnName="cat_Class_Decimal" />
+                <ScalarProperty Name="cat_Class_LCC" ColumnName="cat_Class_LCC" />
+                <ScalarProperty Name="class4_id" ColumnName="class4_id" />
+                <ScalarProperty Name="class3_id" ColumnName="class3_id" />
+                <ScalarProperty Name="class2_id" ColumnName="class2_id" />
+                <ScalarProperty Name="class1_id" ColumnName="class1_id" />
+                <ScalarProperty Name="catalogo_uid" ColumnName="catalogo_uid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="adf95090b76d4c0996b98f2f2621fa8f" Name="Diagram1" ZoomLevel="78">
+        <EntityTypeShape EntityType="CygnusBiblioTKv2Model.APP_GEO_Paises" Width="1.5" PointX="5.25" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CygnusBiblioTKv2Model.tbl_BiblioTK_Autores" Width="1.5" PointX="9.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CygnusBiblioTKv2Model.tbl_BiblioTK_Catalogo_Autores" Width="1.5" PointX="12" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CygnusBiblioTKv2Model.tbl_BiblioTK_Catalogo_Temas" Width="1.5" PointX="12" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CygnusBiblioTKv2Model.tbl_BiblioTK_class1" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CygnusBiblioTKv2Model.tbl_BiblioTK_class2" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CygnusBiblioTKv2Model.tbl_BiblioTK_class3" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CygnusBiblioTKv2Model.tbl_BiblioTK_class4" Width="1.5" PointX="7.5" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CygnusBiblioTKv2Model.tbl_BiblioTK_Donativos" Width="1.5" PointX="9.75" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CygnusBiblioTKv2Model.tbl_BiblioTK_Editoriales" Width="1.5" PointX="7.5" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CygnusBiblioTKv2Model.tbl_BiblioTK_Idiomas" Width="1.5" PointX="7.5" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CygnusBiblioTKv2Model.tbl_BiblioTK_Log" Width="1.5" PointX="12" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CygnusBiblioTKv2Model.tbl_BiblioTK_Temas" Width="1.5" PointX="9.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CygnusBiblioTKv2Model.tbl_BiblioTK_Votacion" Width="1.5" PointX="15" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CygnusBiblioTKv2Model.tbl_Plantel" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CygnusBiblioTKv2Model.tbl_Seguridad_Log" Width="1.5" PointX="9.75" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CygnusBiblioTKv2Model.tbl_Seguridad_PWrecovery" Width="1.5" PointX="9.75" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CygnusBiblioTKv2Model.tbl_Usuarios" Width="1.5" PointX="7.5" PointY="12.25" IsExpanded="true" />
+        <AssociationConnector Association="CygnusBiblioTKv2Model.FK_tbl_Usuarios_APP_GEO_Paises" ManuallyRouted="false" />
+        <AssociationConnector Association="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Catalogo_Autores_tbl_BiblioTK_Autores" ManuallyRouted="false" />
+        <AssociationConnector Association="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Catalogo_Temas_tbl_BiblioTK_Temas" ManuallyRouted="false" />
+        <AssociationConnector Association="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_class2_tbl_BiblioTK_class1" ManuallyRouted="false" />
+        <AssociationConnector Association="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_class3_tbl_BiblioTK_class2" ManuallyRouted="false" />
+        <AssociationConnector Association="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_class4_tbl_BiblioTK_class3" ManuallyRouted="false" />
+        <AssociationConnector Association="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Donativos_tbl_Usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Log_tbl_Usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Votacion_tbl_Usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="CygnusBiblioTKv2Model.FK_tbl_Seguridad_Log_tbl_Usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="CygnusBiblioTKv2Model.FK_tbl_Seguridad_PWrecovery_tbl_Usuarios" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CygnusBiblioTKv2Model.tbl_BiblioTK_Catalogo" Width="1.5" PointX="9.75" PointY="3.5" />
+        <AssociationConnector Association="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Catalogo_Autores_tbl_BiblioTK_Catalogo" />
+        <AssociationConnector Association="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Catalogo_tbl_BiblioTK_class4" />
+        <AssociationConnector Association="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Catalogo_tbl_BiblioTK_Editoriales" />
+        <AssociationConnector Association="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Catalogo_tbl_BiblioTK_Idiomas" />
+        <AssociationConnector Association="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Catalogo_tbl_Usuarios" />
+        <AssociationConnector Association="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Catalogo_Temas_tbl_BiblioTK_Catalogo" />
+        <AssociationConnector Association="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Log_tbl_BiblioTK_Catalogo" />
+        <AssociationConnector Association="CygnusBiblioTKv2Model.FK_tbl_BiblioTK_Votacion_tbl_BiblioTK_Catalogo" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

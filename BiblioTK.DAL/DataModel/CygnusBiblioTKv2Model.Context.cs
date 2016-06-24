@@ -18,6 +18,7 @@ namespace BiblioTK.DAL.DataModel
         public CygnusBiblioTKv2Entities()
             : base("name=CygnusBiblioTKv2Entities")
         {
+            Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

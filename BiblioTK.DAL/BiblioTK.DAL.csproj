@@ -69,6 +69,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CygnusBiblioTKv2Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\SP_ListarCatalogo_Result.cs">
+      <DependentUpon>CygnusBiblioTKv2Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\tbl_BiblioTK_Autores.cs">
       <DependentUpon>CygnusBiblioTKv2Model.tt</DependentUpon>
     </Compile>

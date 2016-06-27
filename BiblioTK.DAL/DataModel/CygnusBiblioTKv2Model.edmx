@@ -499,6 +499,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SP_ListarCatalogo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="CygnusBiblioTKv2ModelStoreContainer">
           <EntitySet Name="APP_GEO_Paises" EntityType="Self.APP_GEO_Paises" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_BiblioTK_Autores" EntityType="Self.tbl_BiblioTK_Autores" Schema="dbo" store:Type="Tables" />
@@ -1085,6 +1086,8 @@
             <End Role="tbl_BiblioTK_Catalogo" EntitySet="tbl_BiblioTK_Catalogo" />
             <End Role="tbl_BiblioTK_Votacion" EntitySet="tbl_BiblioTK_Votacion" />
           </AssociationSet>
+          <FunctionImport Name="SP_ListarCatalogo" ReturnType="Collection(CygnusBiblioTKv2Model.SP_ListarCatalogo_Result)" />
+          <FunctionImport Name="ListarCatalogoSP" ReturnType="Collection(CygnusBiblioTKv2Model.SP_ListarCatalogo_Result)" />
         </EntityContainer>
         <EntityType Name="tbl_BiblioTK_Catalogo">
           <Key>
@@ -1229,6 +1232,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="SP_ListarCatalogo_Result">
+          <Property Type="Guid" Name="catalogo_uid" Nullable="false" />
+          <Property Type="String" Name="cat_Titulo" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="cat_Año" Nullable="true" MaxLength="4" />
+          <Property Type="String" Name="cat_Edicion" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="idioma_nombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="autor_nombrecompleto" Nullable="true" MaxLength="153" />
+          <Property Type="Int16" Name="Voto" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1476,6 +1488,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_ListarCatalogo" FunctionName="CygnusBiblioTKv2Model.Store.SP_ListarCatalogo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CygnusBiblioTKv2Model.SP_ListarCatalogo_Result">
+                <ScalarProperty Name="catalogo_uid" ColumnName="catalogo_uid" />
+                <ScalarProperty Name="cat_Titulo" ColumnName="cat_Titulo" />
+                <ScalarProperty Name="cat_Año" ColumnName="cat_Año" />
+                <ScalarProperty Name="cat_Edicion" ColumnName="cat_Edicion" />
+                <ScalarProperty Name="idioma_nombre" ColumnName="idioma_nombre" />
+                <ScalarProperty Name="autor_nombrecompleto" ColumnName="autor_nombrecompleto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListarCatalogoSP" FunctionName="CygnusBiblioTKv2Model.Store.SP_ListarCatalogo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CygnusBiblioTKv2Model.SP_ListarCatalogo_Result">
+                <ScalarProperty Name="catalogo_uid" ColumnName="catalogo_uid" />
+                <ScalarProperty Name="cat_Titulo" ColumnName="cat_Titulo" />
+                <ScalarProperty Name="cat_Año" ColumnName="cat_Año" />
+                <ScalarProperty Name="cat_Edicion" ColumnName="cat_Edicion" />
+                <ScalarProperty Name="idioma_nombre" ColumnName="idioma_nombre" />
+                <ScalarProperty Name="autor_nombrecompleto" ColumnName="autor_nombrecompleto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

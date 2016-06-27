@@ -7,19 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BiblioTKProject.Models
+namespace BiblioTK.DAL.DataModel
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class tbl_BiblioTK_Log
+    public partial class SP_ListarCatalogo_Result
     {
-        public System.Guid consulta_uid { get; set; }
         public System.Guid catalogo_uid { get; set; }
-        public System.Guid usuario_uid { get; set; }
-        public System.DateTime consulta_fecha { get; set; }
-    
-        public virtual tbl_BiblioTK_Catalogo tbl_BiblioTK_Catalogo { get; set; }
-        public virtual tbl_Usuarios tbl_Usuarios { get; set; }
+        public string cat_Titulo { get; set; }
+        public string cat_Año { get; set; }
+        public string cat_Edicion { get; set; }
+        public string idioma_nombre { get; set; }
+        public string autor_nombrecompleto { get; set; }
+        public int? Voto { get; set; }
+        public string Link { get; set; }
+        public string Tipo { get; set; }
     }
 }

@@ -15,7 +15,14 @@ namespace BiblioTK.Infraestructura.Repositorios
 {
     public class CatalogoRepositorio : RepositorioBase<tbl_BiblioTK_Catalogo>, ICatalogoRepositorio
     {
-        
+
+        public List<SP_ListarCatalogo_Result> ListarTodosSP()
+        {
+            using (CygnusBiblioTKv2Entities context = new CygnusBiblioTKv2Entities())
+            {
+                return context.Database.SqlQuery<SP_ListarCatalogo_Result>("SP_ListarCatalogo").ToList();
+            }
+        }
 
         /// <summary>
         /// Metodo para obtener la lista de libros de 10 en 10
@@ -35,7 +42,7 @@ namespace BiblioTK.Infraestructura.Repositorios
             catch (Exception ex)
             {
 
-                throw ex;
+                return new List<tbl_BiblioTK_Catalogo>();
             }
         }
 

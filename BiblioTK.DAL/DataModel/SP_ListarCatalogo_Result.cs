@@ -22,5 +22,5 @@ namespace BiblioTK.DAL.DataModel
         public int? Voto { get; set; }
         public string Link { get; set; }
         public string Tipo { get; set; }
-    }
+    } 
 }

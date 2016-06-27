@@ -17,6 +17,8 @@ namespace BiblioTK.Infraestructura.Repositorios.Tests
         {
             CatalogoRepositorio catalogoRepositorio = new CatalogoRepositorio();
 
+            var ListSP = catalogoRepositorio.ListarTodosSP();
+          
             //Listar todos llamando al metodo generico "ListarTodos" RepositorioBase.ListarTodos
             var categoryList = catalogoRepositorio.ListarTodos();
 

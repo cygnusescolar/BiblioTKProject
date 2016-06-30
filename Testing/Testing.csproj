@@ -73,6 +73,14 @@
       <Project>{E13BDAFD-E512-4781-853E-246EA306A832}</Project>
       <Name>BiblioTK.Infraestructura</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BiblioTK.Modelos\BiblioTK.Modelos.csproj">
+      <Project>{35cee7f2-e628-4319-95bd-60fcbc998930}</Project>
+      <Name>BiblioTK.Modelos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BiblioTK.Negocio\BiblioTK.Negocio.csproj">
+      <Project>{f897d3b3-2f1c-435c-a73c-1dac98f5e7e3}</Project>
+      <Name>BiblioTK.Negocio</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FuncionesVB\FuncionesVB.vbproj">
       <Project>{b66690ba-a20b-4abb-a037-33c056feacaa}</Project>
       <Name>FuncionesVB</Name>

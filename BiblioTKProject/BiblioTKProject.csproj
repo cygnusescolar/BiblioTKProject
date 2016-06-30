@@ -243,7 +243,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CatalogoViewModel.cs" />
+    <Compile Include="Models\CatalogoViewModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MeController.cs" />
@@ -251,6 +251,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CatalogoController.cs" />
+    <Compile Include="Models\CatalogoIndexModelView.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MeViewModels.cs" />
@@ -264,6 +266,9 @@
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Catalogo.css" />
+    <Content Include="Content\docs.css" />
+    <Content Include="Content\medias.css" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -349,6 +354,10 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="Views\Catalogo\Index.cshtml" />
+    <Content Include="Views\Catalogo\ClasificacionPrincipalMenu.cshtml" />
+    <Content Include="Views\Catalogo\Catalogo.cshtml" />
+    <Content Include="Views\Catalogo\Top10.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -363,6 +372,16 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BiblioTK.Modelos\BiblioTK.Modelos.csproj">
+      <Project>{35cee7f2-e628-4319-95bd-60fcbc998930}</Project>
+      <Name>BiblioTK.Modelos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BiblioTK.Negocio\BiblioTK.Negocio.csproj">
+      <Project>{F897D3B3-2F1C-435C-A73C-1DAC98F5E7E3}</Project>
+      <Name>BiblioTK.Negocio</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

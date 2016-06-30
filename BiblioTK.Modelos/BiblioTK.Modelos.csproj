@@ -43,7 +43,9 @@
     <Compile Include="AutoresDTO.cs" />
     <Compile Include="CatalogoAutoresDTO.cs" />
     <Compile Include="CatalogoDTO.cs" />
+    <Compile Include="CatalogoResult.cs" />
     <Compile Include="CatalogoTemasDTO.cs" />
+    <Compile Include="ClasficacionPrincipalResult.cs" />
     <Compile Include="class1DTO.cs" />
     <Compile Include="class2DTO.cs" />
     <Compile Include="class3DTO.cs" />

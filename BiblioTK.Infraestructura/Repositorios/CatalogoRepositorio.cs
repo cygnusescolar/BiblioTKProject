@@ -10,17 +10,64 @@ using System.Linq.Expressions;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity;
 using BiblioTK.DAL.DataModel;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Data;
 
 namespace BiblioTK.Infraestructura.Repositorios
 {
     public class CatalogoRepositorio : RepositorioBase<tbl_BiblioTK_Catalogo>, ICatalogoRepositorio
     {
 
-        public List<SP_ListarCatalogo_Result> ListarTodosSP()
+
+        //public List<CatalogoResult> ListarTodosSPNoEF()
+        //{
+
+        //    List<CatalogoResult> TestList = new List<CatalogoResult>();
+        //    using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["CygnusBiblioTKv2Entities"].ToString()))
+        //    {
+        //        using (SqlCommand cmd = new SqlCommand("SP_ListarCatalogo", con))
+        //        {
+        //            cmd.CommandType = CommandType.StoredProcedure;
+ 
+        //            con.Open();
+        //            cmd.ExecuteNonQuery();
+
+        //            SqlDataReader reader = cmd.e.ExecuteReader();
+
+        //            CatalogoResult test;
+
+        //            while (reader.Read() && reader.)
+        //            {
+        //                test = new CatalogoResult();
+        //                test.catalogo_uid = (Guid) reader["catalogo_uid"];
+        //                test.cat_Titulo = reader["cat_Titulo"].ToString();
+        //                test.idioma_nombre = reader["idioma_nombre"].ToString();
+        //                test.cat_Año = reader["cat_Año"].ToString();
+        //                test.autor_nombrecompleto = reader["autor_nombrecompleto"].ToString();
+        //                test.Tipo = reader["Tipo"].ToString();
+        //                test.Link = reader["Link"].ToString();
+        //                TestList.Add(test);
+        //            }
+        //        }
+        //    }
+        //    return TestList;
+
+        //}
+
+        public List<CatalogoResult> ListarTodosSP()
         {
             using (CygnusBiblioTKv2Entities context = new CygnusBiblioTKv2Entities())
             {
-                return context.Database.SqlQuery<SP_ListarCatalogo_Result>("SP_ListarCatalogo").ToList();
+                return context.Database.SqlQuery<CatalogoResult>("SP_ListarCatalogo").ToList();
+            }
+        }
+
+        public List<CatalogoResult> listarTodosSPPaginado(int TamanoPagina, int PaginaActual)
+        {
+            using (CygnusBiblioTKv2Entities context = new CygnusBiblioTKv2Entities())
+            {
+                return context.Database.SqlQuery<CatalogoResult>("SP_ListarCatalogo").Skip(TamanoPagina * PaginaActual).Take(TamanoPagina).ToList();
             }
         }
 

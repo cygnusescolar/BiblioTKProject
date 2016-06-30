@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BiblioTK.DAL.DataModel;
+using BiblioTK.Negocio;
 
 namespace BiblioTK.Infraestructura.Repositorios.Tests
 {
@@ -18,7 +19,7 @@ namespace BiblioTK.Infraestructura.Repositorios.Tests
             CatalogoRepositorio catalogoRepositorio = new CatalogoRepositorio();
 
             var ListSP = catalogoRepositorio.ListarTodosSP();
-          
+
             //Listar todos llamando al metodo generico "ListarTodos" RepositorioBase.ListarTodos
             var categoryList = catalogoRepositorio.ListarTodos();
 
@@ -44,7 +45,7 @@ namespace BiblioTK.Infraestructura.Repositorios.Tests
             //incluyen la palabra Cookbook
             var librosCookbook = catalogoRepositorio.ListarPorNombre("Cookbook");
 
-          
+
             Assert.AreEqual(categoryList.Count(), 297);
         }
 
@@ -88,7 +89,7 @@ namespace BiblioTK.Infraestructura.Repositorios.Tests
         public void BorrarNuevoLibro()
         {
             CatalogoRepositorio catalogoRepositorio = new CatalogoRepositorio();
-            
+
             //para utilizar el metodo borrar:
 
             //Puedo buscar la entidad y pasarla como parametro
@@ -101,5 +102,24 @@ namespace BiblioTK.Infraestructura.Repositorios.Tests
 
             Assert.AreEqual(1, 1);
         }
+
+        [TestMethod()]
+        public void ListarTodosSP()
+        {
+            CatalogoRepositorio catalogoRepositorio = new CatalogoRepositorio();
+
+            var listarapida = catalogoRepositorio.ListarTodosSPNoEF();
+            //var listarapida = catalogoRepositorio.listarTodosSPPaginado(10, 7);
+
+            //CatalogoNegocio objCatalogo = new CatalogoNegocio();
+            //var ListSP = objCatalogo.listarCatalogoPorSPPaginado(10, 7);
+
+
+
+
+
+            Assert.AreEqual(listarapida.Count(), 10);
+        }
+
     }
 }

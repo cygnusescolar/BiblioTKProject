@@ -299,7 +299,9 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\BiblioTK.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\catalogoGetData.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\knockout-2.3.0.debug.js" />
@@ -381,6 +383,10 @@
     <ProjectReference Include="..\BiblioTK.Negocio\BiblioTK.Negocio.csproj">
       <Project>{F897D3B3-2F1C-435C-A73C-1DAC98F5E7E3}</Project>
       <Name>BiblioTK.Negocio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FuncionesVB\FuncionesVB.vbproj">
+      <Project>{b66690ba-a20b-4abb-a037-33c056feacaa}</Project>
+      <Name>FuncionesVB</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

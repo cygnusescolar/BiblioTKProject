@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<BiblioTK.Modelos.ClasficacionPrincipalResult>
 
 
-<ul  id="clasficacionDiv" class="nav nav-stacked affix">
+<ul  id="clasficacionDiv" class="nav nav-stacked affix" style="box-shadow: 10px 10px 25px grey; border: 1px solid #a1a1a1;border-radius: 0 0 0 5px;background: #dddddd;">
     <li class="active"><a href="#dropdowns"><i class="icon-chevron-right"></i> Categorias</a></li>
     @foreach (var item in Model)
     {
@@ -9,15 +9,5 @@
     }
 </ul>
 
-     @*<div class="well">
-        <ul class="nav nav-stacked affix">
-            <li class="active"><a href="#dropdowns"><i class="icon-chevron-right"></i> Categorias</a></li>
-            @foreach (var item in Model)
-            {
-                <li class=""><a href="#Clasificacion"><span class="badge badge-warning">@item.Items</span> @item.ClasificacionPrincipal</a></li>
-            }
-        </ul>
-
-    </div>*@
  
  

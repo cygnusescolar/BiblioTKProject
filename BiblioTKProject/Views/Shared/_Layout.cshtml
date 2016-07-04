@@ -17,15 +17,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("BiblioTK", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+     
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
                     <li>@Html.ActionLink("Catalogo", "Index", "Catalogo", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "HelpPage" }, null)</li>
+                    @*<li>@Html.ActionLink("API", "Index", "Help", new { area = "HelpPage" }, null)</li>*@
                 </ul>
-                @Html.Partial("_LoginPartial")
+                @*@Html.Partial("_LoginPartial")*@
             </div>
         </div>
     </div>
@@ -37,14 +38,15 @@
             <div class="col-12">
                 @RenderBody()
             </div>
-        </div>        
-         <div class="row">
+        </div>
+        <div class="row">
             <div class="col-12">
                 @RenderSection("SPAViews", required: false)
             </div>
         </div>        <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - BiblioTK Version 3</p>
+            <small>The information on the Site is provided for educational or information purposes only</small>
         </footer>
     </div>
 
@@ -54,5 +56,21 @@
     @RenderSection("Scripts", required: false)
     <link href="~/Content/Catalogo.css" rel="stylesheet" />
     <link href="~/Content/medias.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            GetData();
+
+            $(window).scroll(function () {
+                if ($(window).scrollTop() ==
+                   $(document).height() - $(window).height()) {
+                    GetData();
+                }
+            });
+        });
+
+
+    </script>
 </body>
 </html>

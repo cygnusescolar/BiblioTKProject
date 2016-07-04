@@ -2,7 +2,7 @@
 
 <div class="container">
     <h2>Catalogo de Libros</h2>
-    <div class="list-group">
+    <div id="DivLibros" class="list-group">
 
         @foreach (var item in Model)
             {
@@ -15,7 +15,9 @@
 
     </div>
 </div>
-
+<div id="progress" style="display:none">
+    <h4>Cargando...</h4>
+</div>
 
 @*@model IEnumerable<BiblioTK.Modelos.CatalogoResult>
 

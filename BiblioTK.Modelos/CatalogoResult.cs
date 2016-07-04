@@ -9,6 +9,8 @@ namespace BiblioTK.Modelos
 
     public partial class CatalogoResult
     {
+        public string cat_Upload_Tipo;
+
         public System.Guid catalogo_uid { get; set; }
         public string cat_Titulo { get; set; }
         public string cat_Año { get; set; }

@@ -13,9 +13,7 @@ namespace BiblioTK.Negocio
         CatalogoRepositorio repo;
 
         public CatalogoNegocio()
-        {
-            //Inicializamos el repositorio al instanciar CatalogoNegocio
-           
+        {           
         }
 
 
@@ -40,7 +38,7 @@ namespace BiblioTK.Negocio
             repo = new CatalogoRepositorio();
             List<CatalogoResult> listaCatalogos = repo.listarTodosSPPaginado(TamanoPagina, PaginaActual);
 
-            //Aqui estamos modificando la lista para concatenar el link cuando el tipo de documento es YOUTUBE
+            //? Aqui estamos modificando la lista para concatenar el link cuando el tipo de documento es YOUTUBE
             listaCatalogos.ForEach(x =>
             {
                 if (x.Tipo == "YOUTUBE")
@@ -50,22 +48,6 @@ namespace BiblioTK.Negocio
             return listaCatalogos;
         }
 
-        public List<ClasficacionPrincipalResult> ListarClasificaionesPrincipales()
-        {
-            MenuRepositorio repo = new MenuRepositorio();
-            List<ClasficacionPrincipalResult> lista = repo.ListarClasificaionesPrincipales();
-
-          
-            return lista;
-        }
-
-        public List<CatalogoResult> ListarTop10(DateTime fecha)
-        {
-            MenuRepositorio repo = new MenuRepositorio();
-            List<CatalogoResult> lista = repo.ListarTop24(fecha);
-
-
-            return lista;
-        }
+       
     }
 }

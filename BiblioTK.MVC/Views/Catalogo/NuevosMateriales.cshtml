@@ -1,0 +1,15 @@
+﻿@model IEnumerable<BiblioTK.Modelos.CatalogoResult>
+
+
+<div class="well">
+    <h3><a href="#">Nuevos Materiales</a></h3>
+    @foreach (var item in Model)
+    {
+        var inverso = item.cat_Titulo.Length - (item.cat_Titulo.Length / 2);
+        if (inverso > 20)
+        {<small><a href="#">@item.cat_Titulo.Substring(0, inverso).ToString() ...</a></small><br />}
+        else
+        {    <small><a href="#">@item.cat_Titulo</a></small><br />}
+    }
+
+</div>

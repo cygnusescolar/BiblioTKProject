@@ -1,0 +1,35 @@
+﻿@model BiblioTK.MVC.Models.CatalogoIndexModelView
+@{
+    var modelo = Model;
+ }
+<div>
+    <div class="row">
+        <div class="col-sm-2 col-4 hidden-sm">
+ 
+            @{Html.RenderPartial("ClasificacionPrincipalMenu", Model.ClasificacionPrincipalMenu);}
+
+        </div>
+        <div class="col-sm-7 col-12">
+            <div class="row">
+                <div class="container">
+                    <h2>Catalogo de Libros</h2>
+                    <div id="DivLibros" class="list-group">
+                        @*se carga via ajax*@
+                    </div>
+                </div>
+                <div id="progress" style="display:none">
+                    <h4>Cargando...</h4>
+                </div>             
+            </div>
+        </div>
+        <div class="col-sm-3 col-4 hidden-sm">
+            <div class="sidebar-nav-fixed pull-right affix">
+                @{Html.RenderPartial("Top10", Model.Top10Menu);}
+                @{Html.RenderPartial("NuevosMateriales", Model.NuevosMaterialesMenu);}
+            </div>
+        </div>
+
+    </div>
+ 
+</div>
+<script src="~/Scripts/catalogoGetData.js"></script>

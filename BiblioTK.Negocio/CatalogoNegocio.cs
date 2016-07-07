@@ -38,7 +38,7 @@ namespace BiblioTK.Negocio
             repo = new CatalogoRepositorio();
             List<CatalogoResult> listaCatalogos = repo.listarTodosSPPaginado(TamanoPagina, PaginaActual);
 
-            //? Aqui estamos modificando la lista para concatenar el link cuando el tipo de documento es YOUTUBE
+            //! Aqui estamos modificando la lista para concatenar el link cuando el tipo de documento es YOUTUBE
             listaCatalogos.ForEach(x =>
             {
                 if (x.Tipo == "YOUTUBE")

@@ -22,5 +22,9 @@ namespace BiblioTK.Modelos
         public string Tipo { get; set; }
         public int CantDesc { get; set; }
 
+        //! epropidad para cargar la ruta de la imagen tumbnail para la lista de catalogos
+        public string imagenRuta { get; set; }
+
+
     }
 }

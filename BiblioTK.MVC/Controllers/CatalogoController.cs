@@ -49,7 +49,7 @@ namespace BiblioTK.MVC.Controllers
         }
 
         // GET: Catalogo
-        //[OutputCache(Duration = 30)]
+        [OutputCache(Duration = 1800)] //? cache con duracion de 30 minutos para que no llame a BD en cada request 
         public ActionResult Index()
         {
             CatalogoIndexModelView modelo = new CatalogoIndexModelView();
@@ -57,7 +57,7 @@ namespace BiblioTK.MVC.Controllers
             MenuNegocio objMenu = new MenuNegocio();
             //modelo.Libros = objCatalogo.listarCatalogoPorSPPaginado(10, 1);
             modelo.ClasificacionPrincipalMenu = objMenu.ListarClasificaionesPrincipales();
-            modelo.Top10Menu = objMenu.ListarTop10(FuncionesVB.FuncionesGenerales.Takoma_UTCToMexCentral().AddDays(-40));
+            modelo.Top10Menu = objMenu.ListarTop10(FuncionesVB.FuncionesGenerales.Takoma_UTCToMexCentral().AddDays(-1));
             modelo.NuevosMaterialesMenu = objMenu.NuevosMateriales();
 
             return View(modelo);
@@ -74,11 +74,11 @@ namespace BiblioTK.MVC.Controllers
                 {
                     if (x.Tipo == "YOUTUBE")
                     {
-                        x.imagenRuta = "Content/images/youtubeColor150.png";
+                        x.imagenRuta = "Content/images/youtubeColor.png";
                     }
                     else if (x.Tipo == "PDF")
                     {
-                        x.imagenRuta = "Content/images/acrobatColor150.png";
+                        x.imagenRuta = "Content/images/acrobatColor80.png";
                     }
                     else if (x.Tipo == "LINK")
                     {
@@ -89,11 +89,11 @@ namespace BiblioTK.MVC.Controllers
                 {
                     if (x.Tipo == "YOUTUBE")
                     {
-                        x.imagenRuta = "Content/images/youtubeBlanco150.png";
+                        x.imagenRuta = "Content/images/youtubeBlanco.png";
                     }
                     else if (x.Tipo == "PDF")
                     {
-                        x.imagenRuta = "Content/images/acrobatBlanco150.png";
+                        x.imagenRuta = "Content/images/acrobatBlanco80.png";
                     }
                     else if (x.Tipo == "LINK")
                     {
@@ -104,5 +104,13 @@ namespace BiblioTK.MVC.Controllers
 
             return Json(Libros.ToList(), JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult CargarLibro()
+        {
+       
+            return View("Libro");
+        }
+
+        
     }
 }

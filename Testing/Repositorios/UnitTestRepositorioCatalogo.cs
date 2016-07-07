@@ -108,8 +108,7 @@ namespace BiblioTK.Infraestructura.Repositorios.Tests
         {
             CatalogoRepositorio catalogoRepositorio = new CatalogoRepositorio();
 
-            var listarapida = catalogoRepositorio.ListarTodosSPNoEF();
-            //var listarapida = catalogoRepositorio.listarTodosSPPaginado(10, 7);
+             var listarapida = catalogoRepositorio.listarTodosSPPaginado(10, 7);
 
             //CatalogoNegocio objCatalogo = new CatalogoNegocio();
             //var ListSP = objCatalogo.listarCatalogoPorSPPaginado(10, 7);

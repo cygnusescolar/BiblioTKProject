@@ -12,50 +12,50 @@ namespace BiblioTK.MVC.Controllers
 {
     public class CatalogoController : Controller
     {
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
+        //private ApplicationSignInManager _signInManager;
+        //private ApplicationUserManager _userManager;
 
-        public CatalogoController()
-        {
-        }
+        //public CatalogoController()
+        //{
+        //}
 
-        public CatalogoController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
-        {
-            UserManager = userManager;
-            SignInManager = signInManager;
-        }
-        public ApplicationSignInManager SignInManager
-        {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set
-            {
-                _signInManager = value;
-            }
-        }
+        //public CatalogoController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        //{
+        //    UserManager = userManager;
+        //    SignInManager = signInManager;
+        //}
+        //public ApplicationSignInManager SignInManager
+        //{
+        //    get
+        //    {
+        //        return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+        //    }
+        //    private set
+        //    {
+        //        _signInManager = value;
+        //    }
+        //}
 
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
-        }
+        //public ApplicationUserManager UserManager
+        //{
+        //    get
+        //    {
+        //        return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+        //    }
+        //    private set
+        //    {
+        //        _userManager = value;
+        //    }
+        //}
 
         // GET: Catalogo
-        [OutputCache(Duration = 1800)] //? cache con duracion de 30 minutos para que no llame a BD en cada request 
+
+        //[OutputCache(Duration = 1800)] //? cache con duracion de 30 minutos para que no llame a BD en cada request 
         public ActionResult Index()
         {
             CatalogoIndexModelView modelo = new CatalogoIndexModelView();
             CatalogoNegocio objCatalogo = new CatalogoNegocio();
             MenuNegocio objMenu = new MenuNegocio();
-            //modelo.Libros = objCatalogo.listarCatalogoPorSPPaginado(10, 1);
             modelo.ClasificacionPrincipalMenu = objMenu.ListarClasificaionesPrincipales();
             modelo.Top10Menu = objMenu.ListarTop10(FuncionesVB.FuncionesGenerales.Takoma_UTCToMexCentral().AddDays(-1));
             modelo.NuevosMaterialesMenu = objMenu.NuevosMateriales();
@@ -63,14 +63,14 @@ namespace BiblioTK.MVC.Controllers
             return View(modelo);
         }
 
-        public ActionResult GetData(int pageIndex, int pageSize)
+        public PartialViewResult GetData(int pageIndex, int pageSize)
         {
             CatalogoNegocio objCatalogo = new CatalogoNegocio();
             var Libros = objCatalogo.listarCatalogoPorSPPaginado(pageSize, pageIndex);
 
             Libros.ForEach(x =>
             {
-                if (true)
+                if (User.Identity.IsAuthenticated)
                 {
                     if (x.Tipo == "YOUTUBE")
                     {
@@ -102,15 +102,28 @@ namespace BiblioTK.MVC.Controllers
                 }
             });
 
-            return Json(Libros.ToList(), JsonRequestBehavior.AllowGet);
+            //return Json(Libros.ToList(), JsonRequestBehavior.AllowGet);
+            return PartialView("Catalogo", Libros.ToList());
+
         }
 
-        public ActionResult CargarLibro()
+        [Authorize]
+        public ActionResult CargarLibro(string idLibro)
         {
-       
+
+            string filePath = "Pdf1.pdf";
+            //build the file path here
+            filePath = "/MyPDFs/" + filePath;
+            //pass the file path to the View using a viewbag variable
+            ViewBag.filePath = filePath;
+            //We could also just return a view along with a query string with a file param pointing to the
+            //location of the file on our server, for example: "Viewer?file=/MyPDFs/Pdf1.pdf"
+            //but here I've just chosen to change the default URL of the viewer object, which is essentially
+            //the same thing
             return View("Libro");
         }
 
-        
+
+
     }
 }

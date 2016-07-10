@@ -6,7 +6,6 @@
     <title>Biblio-TK ● Inicio</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -22,12 +21,12 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                     <li>@Html.ActionLink("Catalogo", "Index", "Catalogo", new { area = "" }, null)</li>
+                     <li>@Html.ActionLink("Catalogo", "Index", "Catalogo")</li>
                      <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Libro", "CargarLibro", "Catalogo")</li>
                 </ul>
-                @*@Html.Partial("_LoginPartial")*@
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
@@ -54,6 +53,7 @@
     @RenderSection("scripts", required: false)
     <link href="~/Content/Catalogo.css" rel="stylesheet" />
     <link href="~/Content/medias.css" rel="stylesheet" />
+    <script src="~/Scripts/catalogoGetData.js"></script>
 
     <script type="text/javascript">
 

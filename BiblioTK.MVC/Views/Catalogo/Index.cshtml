@@ -1,12 +1,11 @@
 ﻿@model BiblioTK.MVC.Models.CatalogoIndexModelView
-@{
-    var modelo = Model;
- }
+
 <div>
     <div class="row">
         <div class="col-sm-2 col-4 hidden-sm">
  
-            @{Html.RenderPartial("ClasificacionPrincipalMenu", Model.ClasificacionPrincipalMenu);}
+            @Html.Partial("ClasificacionPrincipalMenu", Model.ClasificacionPrincipalMenu);
+            @*@{Html.RenderPartial("ClasificacionPrincipalMenu", Model.ClasificacionPrincipalMenu);}*@
 
         </div>
         <div class="col-sm-7 col-12">
@@ -24,12 +23,14 @@
         </div>
         <div class="col-sm-3 col-4 hidden-sm">
             <div class="sidebar-nav-fixed pull-right affix">
-                @{Html.RenderPartial("Top10", Model.Top10Menu);}
-                @{Html.RenderPartial("NuevosMateriales", Model.NuevosMaterialesMenu);}
+                @Html.Partial("Top10", Model.Top10Menu);
+                @Html.Partial("NuevosMateriales", Model.NuevosMaterialesMenu);
+
+                @*@{Html.RenderPartial("Top10", Model.Top10Menu);}
+                @{Html.RenderPartial("NuevosMateriales", Model.NuevosMaterialesMenu);}*@
             </div>
         </div>
 
     </div>
  
 </div>
-<script src="~/Scripts/catalogoGetData.js"></script>

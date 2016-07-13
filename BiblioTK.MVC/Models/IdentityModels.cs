@@ -23,6 +23,8 @@ namespace BiblioTK.MVC.Models
         public ApplicationDbContext()
             : base("UserModuleBDEntities", throwIfV1Schema: false)
         {
+            //Disable initializer - se deshabilita cuando se pasa a produccion
+            Database.SetInitializer<ApplicationDbContext>(null);
         }
 
         public static ApplicationDbContext Create()

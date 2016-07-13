@@ -62,7 +62,7 @@ namespace BiblioTK.MVC.Controllers
 
             return View(modelo);
         }
-
+        [AjaxOnly] //atributo que espeficica que este metodo solo sera llamado via ajax
         public PartialViewResult GetData(int pageIndex, int pageSize)
         {
             CatalogoNegocio objCatalogo = new CatalogoNegocio();
@@ -102,6 +102,7 @@ namespace BiblioTK.MVC.Controllers
                 }
             });
 
+
             //return Json(Libros.ToList(), JsonRequestBehavior.AllowGet);
             return PartialView("Catalogo", Libros.ToList());
 
@@ -110,16 +111,14 @@ namespace BiblioTK.MVC.Controllers
         [Authorize]
         public ActionResult CargarLibro(string idLibro)
         {
+            string filePath = "Pdf1.pdf";//nombre del libro o id
+            //filePath = "/MyPDFs/" + filePath; //Ruta y nombre o id
 
-            string filePath = "Pdf1.pdf";
-            //build the file path here
-            filePath = "/MyPDFs/" + filePath;
-            //pass the file path to the View using a viewbag variable
+            //por ahora en produccion hasta que se defina la ruta de los libros
+            filePath = ""; //Ruta y nombre o id
+
             ViewBag.filePath = filePath;
-            //We could also just return a view along with a query string with a file param pointing to the
-            //location of the file on our server, for example: "Viewer?file=/MyPDFs/Pdf1.pdf"
-            //but here I've just chosen to change the default URL of the viewer object, which is essentially
-            //the same thing
+
             return View("Libro");
         }
 

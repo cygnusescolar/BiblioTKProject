@@ -26,11 +26,39 @@ namespace BiblioTK.Infraestructura.Repositorios
         {
             using (CygnusBiblioTKv2Entities context = new CygnusBiblioTKv2Entities())
             {
-              
+
                 return context.Database.SqlQuery<ClasficacionPrincipalResult>("SP_CantPorClasificacion").ToList();
             }
         }
 
+        public List<ClasficacionPrincipalResult> ListarArbolClasPrincipales()
+        {
+            using (CygnusBiblioTKv2Entities context = new CygnusBiblioTKv2Entities())
+            {
+                var query =
+                    from Tbl_BiblioTK_class2 in context.tbl_BiblioTK_class2
+                    join Tbl_BiblioTK_class3 in context.tbl_BiblioTK_class3
+                          on new { Tbl_BiblioTK_class2.class1_id, Tbl_BiblioTK_class2.class2_id }
+                      equals new { Tbl_BiblioTK_class3.class1_id, Tbl_BiblioTK_class3.class2_id }
+                    join Tbl_BiblioTK_class4 in context.tbl_BiblioTK_class4
+                          on new { Tbl_BiblioTK_class3.class1_id, Tbl_BiblioTK_class3.class2_id, Tbl_BiblioTK_class3.class3_id }
+                      equals new { Tbl_BiblioTK_class4.class1_id, Tbl_BiblioTK_class4.class2_id, Tbl_BiblioTK_class4.class3_id }
+                    select new ClasficacionPrincipalResult
+                    {
+
+                        class1_nombre = Tbl_BiblioTK_class2.tbl_BiblioTK_class1.class1_nombre,
+                        class2_nombre = Tbl_BiblioTK_class2.class2_nombre,
+                        class3_nombre = Tbl_BiblioTK_class3.class3_nombre,
+                        class4_nombre = Tbl_BiblioTK_class4.class4_nombre
+
+                    };
+
+
+                return query.ToList();
+
+                
+            }
+        }
         public List<CatalogoResult> NuevosMateriales()
         {
             using (CygnusBiblioTKv2Entities context = new CygnusBiblioTKv2Entities())

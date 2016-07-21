@@ -196,6 +196,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AjaxOnlyAttribute.cs" />
     <Compile Include="Controllers\CatalogoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -214,13 +215,15 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Catalogo.css" />
     <Content Include="Content\docs.css" />
-    <Content Include="Content\images\acrobatBlanco.png" />
-    <Content Include="Content\images\acrobatColor.png" />
+    <Content Include="Content\images\acrobatBlanco80.png" />
+    <Content Include="Content\images\acrobatColor80.png" />
     <Content Include="Content\images\LINKBlanco.png" />
     <Content Include="Content\images\LINKColor.png" />
-    <Content Include="Content\images\youtubeBlanco150.png" />
-    <Content Include="Content\images\youtubeColor150.png" />
+    <Content Include="Content\images\netImage.jpg" />
+    <Content Include="Content\images\youtubeBlanco.png" />
+    <Content Include="Content\images\youtubeColor.png" />
     <Content Include="Content\medias.css" />
+    <Content Include="Content\navbar.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -232,6 +235,10 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="MyPDFs\Pdf1.pdf" />
+    <Content Include="MyPDFs\Pdf2.pdf" />
+    <Content Include="MyPDFs\Pdf3.pdf" />
+    <None Include="Properties\PublishProfiles\MVCBB.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\catalogoGetData.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -242,10 +249,43 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\pdf.js\api.js" />
+    <Content Include="Scripts\pdf.js\bidi.js" />
+    <Content Include="Scripts\pdf.js\canvas.js" />
+    <Content Include="Scripts\pdf.js\charsets.js" />
+    <Content Include="Scripts\pdf.js\cidmaps.js" />
+    <Content Include="Scripts\pdf.js\colorspace.js" />
+    <Content Include="Scripts\pdf.js\compatibility.js" />
+    <Content Include="Scripts\pdf.js\core.js" />
+    <Content Include="Scripts\pdf.js\crypto.js" />
+    <Content Include="Scripts\pdf.js\debugger.js" />
+    <Content Include="Scripts\pdf.js\evaluator.js" />
+    <Content Include="Scripts\pdf.js\fonts.js" />
+    <Content Include="Scripts\pdf.js\function.js" />
+    <Content Include="Scripts\pdf.js\glyphlist.js" />
+    <Content Include="Scripts\pdf.js\image.js" />
+    <Content Include="Scripts\pdf.js\jbig2.js" />
+    <Content Include="Scripts\pdf.js\jpg.js" />
+    <Content Include="Scripts\pdf.js\jpx.js" />
+    <Content Include="Scripts\pdf.js\l10n.js" />
+    <Content Include="Scripts\pdf.js\metadata.js" />
+    <Content Include="Scripts\pdf.js\metrics.js" />
+    <Content Include="Scripts\pdf.js\obj.js" />
+    <Content Include="Scripts\pdf.js\parser.js" />
+    <Content Include="Scripts\pdf.js\pattern.js" />
+    <Content Include="Scripts\pdf.js\pdf.js" />
+    <Content Include="Scripts\pdf.js\stream.js" />
+    <Content Include="Scripts\pdf.js\util.js" />
+    <Content Include="Scripts\pdf.js\viewer.css" />
+    <Content Include="Scripts\pdf.js\viewer.js" />
+    <Content Include="Scripts\pdf.js\worker.js" />
+    <Content Include="Scripts\pdf.js\worker_loader.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -284,6 +324,7 @@
     <Content Include="Views\Catalogo\Index.cshtml" />
     <Content Include="Views\Catalogo\NuevosMateriales.cshtml" />
     <Content Include="Views\Catalogo\Top10.cshtml" />
+    <Content Include="Views\Catalogo\Libro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

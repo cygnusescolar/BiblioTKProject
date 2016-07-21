@@ -54,6 +54,7 @@
     <Compile Include="EditorialesDTO.cs" />
     <Compile Include="IdiomasDTO.cs" />
     <Compile Include="LogDTO.cs" />
+    <Compile Include="MenuResult.cs" />
     <Compile Include="PaisesDTO.cs" />
     <Compile Include="PlantelDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

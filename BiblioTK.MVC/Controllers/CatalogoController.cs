@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Caching;
 using Microsoft.AspNet.Identity.Owin;
 using BiblioTK.MVC.Models;
+using BiblioTK.Modelos;
 
 namespace BiblioTK.MVC.Controllers
 {
@@ -56,13 +57,44 @@ namespace BiblioTK.MVC.Controllers
             CatalogoIndexModelView modelo = new CatalogoIndexModelView();
             CatalogoNegocio objCatalogo = new CatalogoNegocio();
             MenuNegocio objMenu = new MenuNegocio();
-            modelo.ClasificacionPrincipalMenu = objMenu.ListarClasificaionesPrincipales();
+            var nivel11 = objMenu.ListarClasificaionesPrincipales();
+
+            modelo.ClasificacionPrincipalMenu = (from n1 in nivel11
+                                                 group n1 by n1.class1_nombre into grupo1
+                                                 select new MenuResult
+                                                 {
+                                                     NombreGrupo = grupo1.Key.ToString(),
+                                                     NombresItems = (from n2 in grupo1
+                                                                     group n2 by n2.class2_nombre into grupo2
+                                                                     select new MenuResult
+                                                                     {
+                                                                         NombreGrupo = grupo2.Key.ToString(),
+                                                                         NombresItems = (from n3 in grupo2
+                                                                                         group n3 by n3.class3_nombre into grupo3
+                                                                                         select new MenuResult
+                                                                                         {
+                                                                                             NombreGrupo = grupo3.Key,
+                                                                                         }
+                                                                                  ).ToList()
+                                                                     }
+
+
+                                                             ).ToList()
+
+
+                                                 }).ToList();
+
+
+
+
             modelo.Top10Menu = objMenu.ListarTop10(FuncionesVB.FuncionesGenerales.Takoma_UTCToMexCentral().AddDays(-1));
             modelo.NuevosMaterialesMenu = objMenu.NuevosMateriales();
 
             return View(modelo);
         }
-        [AjaxOnly] //atributo que espeficica que este metodo solo sera llamado via ajax
+
+        ///atributo que espeficica que este metodo solo sera llamado via ajax
+        [AjaxOnly]
         public PartialViewResult GetData(int pageIndex, int pageSize)
         {
             CatalogoNegocio objCatalogo = new CatalogoNegocio();

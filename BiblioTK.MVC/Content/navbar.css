@@ -54,6 +54,11 @@
   color: #ffffff;
 }
 
+.navbar-nav>li>a.profile-image {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
     color: #ffffff;
@@ -68,4 +73,11 @@
     color: #ffffff;
     background-color: #0676bf;
   }
+}
+
+.input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+    width: 500px;
 }

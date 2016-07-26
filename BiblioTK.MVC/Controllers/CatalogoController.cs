@@ -8,7 +8,7 @@ using System.Web.Caching;
 using Microsoft.AspNet.Identity.Owin;
 using BiblioTK.MVC.Models;
 using BiblioTK.Modelos;
-
+ 
 namespace BiblioTK.MVC.Controllers
 {
     public class CatalogoController : Controller
@@ -57,37 +57,9 @@ namespace BiblioTK.MVC.Controllers
             CatalogoIndexModelView modelo = new CatalogoIndexModelView();
             CatalogoNegocio objCatalogo = new CatalogoNegocio();
             MenuNegocio objMenu = new MenuNegocio();
-            var nivel11 = objMenu.ListarClasificaionesPrincipales();
-
-            modelo.ClasificacionPrincipalMenu = (from n1 in nivel11
-                                                 group n1 by n1.class1_nombre into grupo1
-                                                 select new MenuResult
-                                                 {
-                                                     NombreGrupo = grupo1.Key.ToString(),
-                                                     NombresItems = (from n2 in grupo1
-                                                                     group n2 by n2.class2_nombre into grupo2
-                                                                     select new MenuResult
-                                                                     {
-                                                                         NombreGrupo = grupo2.Key.ToString(),
-                                                                         NombresItems = (from n3 in grupo2
-                                                                                         group n3 by n3.class3_nombre into grupo3
-                                                                                         select new MenuResult
-                                                                                         {
-                                                                                             NombreGrupo = grupo3.Key,
-                                                                                         }
-                                                                                  ).ToList()
-                                                                     }
-
-
-                                                             ).ToList()
-
-
-                                                 }).ToList();
-
-
-
-
-            modelo.Top10Menu = objMenu.ListarTop10(FuncionesVB.FuncionesGenerales.Takoma_UTCToMexCentral().AddDays(-1));
+            modelo.ClasificacionPrincipalMenu = objMenu.ListarClasificaionesPrincipales();
+            
+            modelo.Top10Menu = objMenu.ListarTop10(FuncionesVB.FuncionesGenerales.Takoma_UTCToMexCentral());
             modelo.NuevosMaterialesMenu = objMenu.NuevosMateriales();
 
             return View(modelo);
@@ -135,7 +107,6 @@ namespace BiblioTK.MVC.Controllers
             });
 
 
-            //return Json(Libros.ToList(), JsonRequestBehavior.AllowGet);
             return PartialView("Catalogo", Libros.ToList());
 
         }
@@ -143,15 +114,9 @@ namespace BiblioTK.MVC.Controllers
         [Authorize]
         public ActionResult CargarLibro(string idLibro)
         {
-            string filePath = "Pdf1.pdf";//nombre del libro o id
-            //filePath = "/MyPDFs/" + filePath; //Ruta y nombre o id
-
-            //por ahora en produccion hasta que se defina la ruta de los libros
-            filePath = ""; //Ruta y nombre o id
-
-            ViewBag.filePath = filePath;
-
-            return View("Libro");
+            CatalogoNegocio objCatalogo = new CatalogoNegocio();
+            string urliframe = objCatalogo.ObtenerUrlIframe(idLibro);  
+            return View("Libro", null, urliframe);
         }
 
 

@@ -6,8 +6,17 @@
     @Html.AntiForgeryToken()
 
     <ul class="nav navbar-nav navbar-right">
+     
         <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            <a href="@Url.Action("Index","Manage")" title="Manage" class="profile-image">
+                <img src="http://placehold.it/30x30" class="img-circle"> Hello @User.Identity.GetUserName()!
+            </a>
+            @*<b href="#" class="dropdown-toggle profile-image" data-toggle="dropdown">
+                <img src="http://placehold.it/30x30" class="img-circle">
+
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </b>*@
+ 
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     </ul>

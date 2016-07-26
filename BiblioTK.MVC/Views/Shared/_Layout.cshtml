@@ -6,6 +6,7 @@
     <title>Biblio-TK ● Inicio</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <link href="~/Content/navbar.css" rel="stylesheet" />
 </head>
 <body>
@@ -57,11 +58,12 @@
                 @RenderBody()
             </div>
         </div>
-        <div class="row">
+        @*<div class="row">
             <div class="col-12">
                 @RenderSection("SPAViews", required: false)
             </div>
-        </div>        <hr />
+        </div>*@      
+          <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - BiblioTK Version 3</p>
             <small>The information on the Site is provided for educational or information purposes only</small>

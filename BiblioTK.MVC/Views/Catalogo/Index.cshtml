@@ -3,10 +3,7 @@
 <div>
     <div class="row">
         <div class="col-sm-2 col-4 hidden-sm">
- 
-            @Html.Partial("ClasificacionPrincipalMenu", Model.ClasificacionPrincipalMenu)
-            @*@{Html.RenderPartial("ClasificacionPrincipalMenu", Model.ClasificacionPrincipalMenu);}*@
-
+                @Html.Partial("ClasificacionPrincipalMenu", Model.ClasificacionPrincipalMenu)
         </div>
         <div class="col-sm-7 col-12">
             <div class="row">
@@ -18,22 +15,19 @@
                 </div>
                 <div id="progress" style="display:none">
                     <h4>Cargando...</h4>
-                </div>             
+                </div>
             </div>
         </div>
         <div class="col-sm-3 col-4 hidden-sm">
             <div class="sidebar-nav-fixed pull-right affix">
                 @Html.Partial("Top10", Model.Top10Menu)
                 @Html.Partial("NuevosMateriales", Model.NuevosMaterialesMenu)
-
-                @*@{Html.RenderPartial("Top10", Model.Top10Menu);}
-                @{Html.RenderPartial("NuevosMateriales", Model.NuevosMaterialesMenu);}*@
             </div>
         </div>
 
     </div>
- 
+
 </div>
- @*este archivo javascript carga el metodo GetData para listar los 10 siguientes libros del catalogo (paginado)*@
+@*este archivo javascript carga el metodo GetData para listar los 10 siguientes libros del catalogo (paginado)*@
 <script src="~/Scripts/catalogoGetData.js"></script>
 

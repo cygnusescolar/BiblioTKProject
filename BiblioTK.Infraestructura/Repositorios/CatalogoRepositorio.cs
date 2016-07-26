@@ -113,5 +113,15 @@ namespace BiblioTK.Infraestructura.Repositorios
             }
         }
 
+        public CatalogoResult ObtenerPorId(string id)
+        {
+            using (CygnusBiblioTKv2Entities context = new CygnusBiblioTKv2Entities())
+            {
+                var libro = context.tbl_BiblioTK_Catalogo.Where(x => x.catalogo_uid.ToString().Equals(id)).FirstOrDefault();
+                return new CatalogoResult { catalogo_uid = libro.catalogo_uid,
+                cat_Titulo = libro.cat_Titulo, cat_Año  = libro.cat_Año, Tipo = libro.cat_Upload_Tipo, Link = libro.cat_Upload_Link};
+            }
+        }
+
     }
 }

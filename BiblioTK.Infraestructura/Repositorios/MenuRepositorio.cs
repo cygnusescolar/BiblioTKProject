@@ -69,7 +69,8 @@ namespace BiblioTK.Infraestructura.Repositorios
                 {
                     catalogo_uid = x.catalogo_uid,
                     cat_Titulo = x.cat_Titulo,
-                    cat_Upload_Tipo = x.cat_Upload_Tipo
+                    Tipo = x.cat_Upload_Tipo,
+                    Link = x.cat_Upload_Link
                 }).ToList();
 
                 return nuevaLista;

@@ -35,22 +35,32 @@
                 </ul>
 
 
-            @if (User.Identity.IsAuthenticated)
-            {
-                <form class="navbar-form">
-                    <div class="form-group" style="display:inline;">
-                        <div class="input-group">
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-                            <input class="form-control" name="search" placeholder="Buscar" autocomplete="off" autofocus="autofocus" type="text">
-                        </div>
-                    </div>
-                </form>
-            }
-                
-                
+                @{
+                    var pageName = ViewContext.RouteData.Values["controller"].ToString();
+                    if (User.Identity.IsAuthenticated && pageName == "Catalogo")
+                    {
+                        using (Ajax.BeginForm("BuscarPorTitulo", "Catalogo", new AjaxOptions
+                        {
+                            InsertionMode = InsertionMode.Replace, 
+                            UpdateTargetId = "divResultados",
+                            LoadingElementId = "progress"
+                        }, new { @class="navbar-form" }))
+                        {
+                            <div class="form-group" style="display:inline;">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                                    <input class="form-control" name="searchText" placeholder="Buscar" autocomplete="off" autofocus="autofocus" type="text">
+                                </div>
+                            </div>
+                        }
+                     }
+                }
+
             </div><!--/.nav-collapse -->
         </div>
     </div>
+
+
     <!-- Content -->
     <div class="body-content">
         <div class="row">
@@ -59,11 +69,11 @@
             </div>
         </div>
         @*<div class="row">
-            <div class="col-12">
-                @RenderSection("SPAViews", required: false)
-            </div>
-        </div>*@      
-          <hr />
+                <div class="col-12">
+                    @RenderSection("SPAViews", required: false)
+                </div>
+            </div>*@
+        <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - BiblioTK Version 3</p>
             <small>The information on the Site is provided for educational or information purposes only</small>
@@ -71,7 +81,9 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
     @RenderSection("scripts", required: false)
     <link href="~/Content/Catalogo.css" rel="stylesheet" />
     <link href="~/Content/medias.css" rel="stylesheet" />
@@ -87,7 +99,6 @@
                 }
             });
         });
-
 
     </script>
 

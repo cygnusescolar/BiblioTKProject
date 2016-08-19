@@ -12,10 +12,22 @@ namespace BiblioTK.Negocio
     {
         CatalogoRepositorio repo;
 
+        #region ////MetodosLocales/////
+        private static void ConfigurarEnlaceYouTube(List<CatalogoResult> listaCatalogos)
+        {
+            //! Aqui estamos modificando la lista para concatenar el link cuando el tipo de documento es YOUTUBE
+            listaCatalogos.ForEach(x =>
+            {
+                if (x.Tipo == "YOUTUBE")
+                    x.Link = "www.youtube.com/" + x.Link;
+
+            });
+        }
+        #endregion
+
         public CatalogoNegocio()
         {           
         }
-
 
         public List<CatalogoResult> listarCatalogoPorSP()
         {
@@ -32,21 +44,16 @@ namespace BiblioTK.Negocio
             return listaCatalogos;
         }
 
-
-        public List<CatalogoResult> listarCatalogoPorSPPaginado(int TamanoPagina, int PaginaActual)
+        public List<CatalogoResult> listarCatalogoPorSPPaginado(int TamanoPagina, int PaginaActual, bool isAuthenticated)
         {
             repo = new CatalogoRepositorio();
             List<CatalogoResult> listaCatalogos = repo.listarTodosSPPaginado(TamanoPagina, PaginaActual);
- 
-            //! Aqui estamos modificando la lista para concatenar el link cuando el tipo de documento es YOUTUBE
-            listaCatalogos.ForEach(x =>
-            {
-                if (x.Tipo == "YOUTUBE")
-                    x.Link = "www.youtube.com/" + x.Link;
+            ConfigurarEnlaceYouTube(listaCatalogos);
+            ConfigurarRutaImagen(isAuthenticated, listaCatalogos);
 
-            });
             return listaCatalogos;
         }
+
 
         public CatalogoResult ObtenerLibroPorId(string id)
         {
@@ -75,6 +82,83 @@ namespace BiblioTK.Negocio
             return urliframe;
         }
 
+        public List<CatalogoResult> ListarCatalogoPorMenu(string niveles, bool isAuthenticated, int TamanoPagina, int PaginaActual)
+        {
+            string[] levels = niveles.Split('-').ToArray();
+            string nivel1 = "+";
+            string nivel2 = "+";
+            string nivel3 = "+";
+
+            switch (int.Parse(levels[0]))
+            {
+                case 1:
+                    nivel1 = levels[1];
+                    break;
+                case 2:
+                    nivel1 = levels[1];
+                    nivel2 = levels[2];
+                    break;
+                case 3:
+                    nivel1 = levels[1];
+                    nivel2 = levels[2];
+                    nivel3 = levels[3];
+                    break;
+                default:
+                    break;
+            }
+            repo = new CatalogoRepositorio();
+            List<CatalogoResult> listaCatalogos = repo.ListarCatalogoPorMenu(nivel1, nivel2, nivel3, TamanoPagina, PaginaActual);
+            ConfigurarEnlaceYouTube(listaCatalogos);
+            ConfigurarRutaImagen(isAuthenticated, listaCatalogos);
+            return listaCatalogos;
+        }
+
+        private static void ConfigurarRutaImagen(bool isAuthenticated, List<CatalogoResult> listaCatalogos)
+        {
+            listaCatalogos.ForEach(x =>
+            {
+                if (isAuthenticated)
+                {
+                    if (x.Tipo == "YOUTUBE")
+                    {
+                        x.imagenRuta = "Content/images/youtubeColor.png";
+                    }
+                    else if (x.Tipo == "PDF")
+                    {
+                        x.imagenRuta = "Content/images/acrobatColor80.png";
+                    }
+                    else if (x.Tipo == "LINK")
+                    {
+                        x.imagenRuta = "Content/images/LINKColor.png";
+                    }
+                }
+                else
+                {
+                    if (x.Tipo == "YOUTUBE")
+                    {
+                        x.imagenRuta = "Content/images/youtubeBlanco.png";
+                    }
+                    else if (x.Tipo == "PDF")
+                    {
+                        x.imagenRuta = "Content/images/acrobatBlanco80.png";
+                    }
+                    else if (x.Tipo == "LINK")
+                    {
+                        x.imagenRuta = "Content/images/LINKBlanco.png";
+                    }
+                }
+            });
+        }
+
+        public List<CatalogoResult> BuscarPorTitulo(bool isAuthenticated, string NombreLibro)
+        {
+            repo = new CatalogoRepositorio();
+            List<CatalogoResult> listaCatalogos = repo.ListarPorNombre(NombreLibro);
+            ConfigurarEnlaceYouTube(listaCatalogos);
+            ConfigurarRutaImagen(isAuthenticated, listaCatalogos);
+
+            return listaCatalogos;
+        }
 
     }
 }

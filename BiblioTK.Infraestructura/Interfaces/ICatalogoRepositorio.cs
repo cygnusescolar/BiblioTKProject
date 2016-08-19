@@ -14,7 +14,6 @@ namespace BiblioTK.Infraestructura.Interfaces
         List<CatalogoResult> ListarTodosSP();
         List<CatalogoResult> listarTodosSPPaginado(int TamanoPagina, int PaginaActual);
         List<tbl_BiblioTK_Catalogo> ListarTodosPaginado(int TamanoPagina, int PaginaActual);
-        tbl_BiblioTK_Catalogo ObtenerPorNombre(string NombreLibro);
-        List<tbl_BiblioTK_Catalogo> ListarPorNombre(string NombreLibro);
+        List<CatalogoResult> ListarPorNombre(string NombreLibro);
     }
 }

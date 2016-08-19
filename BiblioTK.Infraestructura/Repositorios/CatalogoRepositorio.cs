@@ -29,7 +29,7 @@ namespace BiblioTK.Infraestructura.Repositorios
         //        using (SqlCommand cmd = new SqlCommand("SP_ListarCatalogo", con))
         //        {
         //            cmd.CommandType = CommandType.StoredProcedure;
- 
+
         //            con.Open();
         //            cmd.ExecuteNonQuery();
 
@@ -93,23 +93,30 @@ namespace BiblioTK.Infraestructura.Repositorios
             }
         }
 
-        /// <summary>
-        /// Buscar un libro por el nombre
-        /// </summary>
-        /// <returns></returns>
-        public tbl_BiblioTK_Catalogo ObtenerPorNombre(string NombreLibro)
+        
+        public List<CatalogoResult> ListarPorNombre(string NombreLibro)
         {
             using (CygnusBiblioTKv2Entities context = new CygnusBiblioTKv2Entities())
             {
-                return context.tbl_BiblioTK_Catalogo.Where(x => x.cat_Titulo.Equals(NombreLibro)).FirstOrDefault();
-            }
-        }
+                //return context.tbl_BiblioTK_Catalogo.Where(x => x.cat_Titulo.Contains(NombreLibro)).ToList();
+                var libros = (from q in context.tbl_BiblioTK_Catalogo_Autores
+                              where q.tbl_BiblioTK_Catalogo.cat_Titulo.Contains(NombreLibro)
+                              orderby
+                                q.tbl_BiblioTK_Catalogo.cat_Titulo
+                              select new CatalogoResult
+                              {
+                                  catalogo_uid = q.tbl_BiblioTK_Catalogo.catalogo_uid,
+                                  Tipo = q.tbl_BiblioTK_Catalogo.cat_Upload_Tipo,
+                                  cat_Titulo = q.tbl_BiblioTK_Catalogo.cat_Titulo,
+                                  cat_Año = q.tbl_BiblioTK_Catalogo.cat_Año,
+                                  cat_Edicion = q.tbl_BiblioTK_Catalogo.cat_Edicion,
+                                  idioma_nombre = q.tbl_BiblioTK_Catalogo.tbl_BiblioTK_Idiomas.idioma_nombre,
+                                  autor_nombrecompleto = q.tbl_BiblioTK_Autores.autor_apellido_paterno + (!string.IsNullOrEmpty(q.tbl_BiblioTK_Autores.autor_apellido_materno) ? ", " + q.tbl_BiblioTK_Autores.autor_apellido_materno : string.Empty),
+                                  Link = q.tbl_BiblioTK_Catalogo.cat_Upload_Link
+                              }).ToList();
+                              //}).Skip(TamanoPagina * PaginaActual).Take(TamanoPagina).ToList();
 
-        public List<tbl_BiblioTK_Catalogo> ListarPorNombre(string NombreLibro)
-        {
-            using (CygnusBiblioTKv2Entities context = new CygnusBiblioTKv2Entities())
-            {
-                return context.tbl_BiblioTK_Catalogo.Where(x => x.cat_Titulo.Contains(NombreLibro)).ToList();
+                return libros;
             }
         }
 
@@ -117,9 +124,49 @@ namespace BiblioTK.Infraestructura.Repositorios
         {
             using (CygnusBiblioTKv2Entities context = new CygnusBiblioTKv2Entities())
             {
-                var libro = context.tbl_BiblioTK_Catalogo.Where(x => x.catalogo_uid.ToString().Equals(id)).FirstOrDefault();
-                return new CatalogoResult { catalogo_uid = libro.catalogo_uid,
-                cat_Titulo = libro.cat_Titulo, cat_Año  = libro.cat_Año, Tipo = libro.cat_Upload_Tipo, Link = libro.cat_Upload_Link};
+                
+                var libro = (from q in context.tbl_BiblioTK_Catalogo_Autores
+                              where q.tbl_BiblioTK_Catalogo.catalogo_uid.ToString().Equals(id)
+                              orderby
+                                q.tbl_BiblioTK_Catalogo.cat_Titulo
+                              select new CatalogoResult
+                              {
+                                  catalogo_uid = q.tbl_BiblioTK_Catalogo.catalogo_uid,
+                                  Tipo = q.tbl_BiblioTK_Catalogo.cat_Upload_Tipo,
+                                  cat_Titulo = q.tbl_BiblioTK_Catalogo.cat_Titulo,
+                                  cat_Año = q.tbl_BiblioTK_Catalogo.cat_Año,
+                                  cat_Edicion = q.tbl_BiblioTK_Catalogo.cat_Edicion,
+                                  idioma_nombre = q.tbl_BiblioTK_Catalogo.tbl_BiblioTK_Idiomas.idioma_nombre,
+                                  autor_nombrecompleto = q.tbl_BiblioTK_Autores.autor_apellido_paterno + (!string.IsNullOrEmpty(q.tbl_BiblioTK_Autores.autor_apellido_materno) ? ", " + q.tbl_BiblioTK_Autores.autor_apellido_materno : string.Empty),
+                                  Link = q.tbl_BiblioTK_Catalogo.cat_Upload_Link
+                              }).FirstOrDefault();
+ 
+                return libro;
+            }
+        }
+
+        public List<CatalogoResult> ListarCatalogoPorMenu(string nivel1, string nivel2, string nivel3, int TamanoPagina, int PaginaActual)
+        {
+            using (CygnusBiblioTKv2Entities context = new CygnusBiblioTKv2Entities())
+            {                 
+                var libros = (from q in context.tbl_BiblioTK_Catalogo_Autores
+                              where q.tbl_BiblioTK_Catalogo.class1_id == nivel1 && q.tbl_BiblioTK_Catalogo.class2_id == nivel2
+                              && q.tbl_BiblioTK_Catalogo.class3_id == nivel3 && q.tbl_BiblioTK_Catalogo.class4_id == "+"
+                              orderby
+                                q.tbl_BiblioTK_Catalogo.cat_Titulo
+                              select new CatalogoResult
+                              {
+                                  catalogo_uid = q.tbl_BiblioTK_Catalogo.catalogo_uid,
+                                  Tipo = q.tbl_BiblioTK_Catalogo.cat_Upload_Tipo,
+                                  cat_Titulo = q.tbl_BiblioTK_Catalogo.cat_Titulo,
+                                  cat_Año = q.tbl_BiblioTK_Catalogo.cat_Año,
+                                  cat_Edicion = q.tbl_BiblioTK_Catalogo.cat_Edicion,
+                                  idioma_nombre = q.tbl_BiblioTK_Catalogo.tbl_BiblioTK_Idiomas.idioma_nombre,
+                                  autor_nombrecompleto = q.tbl_BiblioTK_Autores.autor_apellido_paterno + (!string.IsNullOrEmpty(q.tbl_BiblioTK_Autores.autor_apellido_materno) ? ", " + q.tbl_BiblioTK_Autores.autor_apellido_materno : string.Empty),
+                                  Link = q.tbl_BiblioTK_Catalogo.cat_Upload_Link
+                              }).Skip(TamanoPagina * PaginaActual).Take(TamanoPagina).ToList();
+
+                return libros;
             }
         }
 

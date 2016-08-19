@@ -1,20 +1,23 @@
 ﻿@model IEnumerable<BiblioTK.Modelos.CatalogoResult>
-@foreach (var item in Model)
-{
-    <ul class="media-list main-list list-group-item">
-        <li class="media">
-            <a class="pull-left" href=" url ">
-                <img class="media-object img-responsive" src="@item.imagenRuta" alt="Book">
-            </a>
-            <div class="media-body">
-                <h4 class="li-head">
-                    @Html.ActionLink(item.cat_Titulo, "CargarLibro", new { idLibro = item.catalogo_uid })
-                </h4>
-                <p class="li-sub"> @item.autor_nombrecompleto  </p>
-                <p class="li-sub">  @item.cat_Año  </p>
-            </div>
-        </li>
-    </ul>;
 
-}
+ <input type="hidden" value="@ViewBag.TotalLibros" id='htotalLibros' class='h_v'>
+<div id="divResultados">
+    @foreach (var item in Model)
+    {
+        <ul class="media-list main-list list-group-item">
+            <li class="media">
+                <a class="pull-left" href=" url ">
+                    <img class="media-object img-responsive" src="@item.imagenRuta" alt="Book">
+                </a>
+                <div class="media-body">
+                    <h4 class="li-head">
+                        @Html.ActionLink(item.cat_Titulo, "CargarLibro", new { idLibro = item.catalogo_uid })
+                    </h4>
+                    <p class="li-sub"> @item.autor_nombrecompleto  </p>
+                    <p class="li-sub">  @item.cat_Año  </p>
+                </div>
+            </li>
+        </ul>;
 
+    }
+</div>

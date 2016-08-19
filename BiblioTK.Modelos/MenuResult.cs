@@ -10,6 +10,7 @@ namespace BiblioTK.Modelos
     {
         public List<MenuResult> NombresItems { get; set; }
         public string NombreGrupo { get; set; }
+        public string classId { get; set; }
 
     }
 }

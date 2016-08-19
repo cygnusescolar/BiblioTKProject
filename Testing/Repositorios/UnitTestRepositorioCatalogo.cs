@@ -120,5 +120,14 @@ namespace BiblioTK.Infraestructura.Repositorios.Tests
             Assert.AreEqual(listarapida.Count(), 10);
         }
 
+        [TestMethod()]
+        public void ListarCatalogoPorMenu()
+        {
+            CatalogoRepositorio catalogoRepositorio = new CatalogoRepositorio();
+
+            var listarapida = catalogoRepositorio.ListarCatalogoPorMenu("100", ".100", ".100");
+
+            Assert.AreEqual(listarapida.Count(), 289);
+        }
     }
 }

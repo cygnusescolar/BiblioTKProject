@@ -58,7 +58,7 @@ namespace BiblioTK.MVC.Controllers
             CatalogoNegocio objCatalogo = new CatalogoNegocio();
             MenuNegocio objMenu = new MenuNegocio();
             modelo.ClasificacionPrincipalMenu = objMenu.ListarClasificaionesPrincipales();
-            
+
             modelo.Top10Menu = objMenu.ListarTop10(FuncionesVB.FuncionesGenerales.Takoma_UTCToMexCentral());
             modelo.NuevosMaterialesMenu = objMenu.NuevosMateriales();
 
@@ -70,44 +70,8 @@ namespace BiblioTK.MVC.Controllers
         public PartialViewResult GetData(int pageIndex, int pageSize)
         {
             CatalogoNegocio objCatalogo = new CatalogoNegocio();
-            var Libros = objCatalogo.listarCatalogoPorSPPaginado(pageSize, pageIndex);
-
-            Libros.ForEach(x =>
-            {
-                if (User.Identity.IsAuthenticated)
-                {
-                    if (x.Tipo == "YOUTUBE")
-                    {
-                        x.imagenRuta = "Content/images/youtubeColor.png";
-                    }
-                    else if (x.Tipo == "PDF")
-                    {
-                        x.imagenRuta = "Content/images/acrobatColor80.png";
-                    }
-                    else if (x.Tipo == "LINK")
-                    {
-                        x.imagenRuta = "Content/images/LINKColor.png";
-                    }
-                }
-                else
-                {
-                    if (x.Tipo == "YOUTUBE")
-                    {
-                        x.imagenRuta = "Content/images/youtubeBlanco.png";
-                    }
-                    else if (x.Tipo == "PDF")
-                    {
-                        x.imagenRuta = "Content/images/acrobatBlanco80.png";
-                    }
-                    else if (x.Tipo == "LINK")
-                    {
-                        x.imagenRuta = "Content/images/LINKBlanco.png";
-                    }
-                }
-            });
-
-
-            return PartialView("Catalogo", Libros.ToList());
+            var Libros = objCatalogo.listarCatalogoPorSPPaginado(pageSize, pageIndex, User.Identity.IsAuthenticated);
+           return PartialView("Catalogo", Libros.ToList());
 
         }
 
@@ -119,7 +83,20 @@ namespace BiblioTK.MVC.Controllers
             return View("Libro", null, urliframe);
         }
 
+        [AjaxOnly]
+        public PartialViewResult CargarCatalogoFiltrado(string level, int pageSize, int pageIndex)
+        {
+            CatalogoNegocio objCatalogo = new CatalogoNegocio();
+            var Libros = objCatalogo.ListarCatalogoPorMenu(level, User.Identity.IsAuthenticated, pageSize, pageIndex);
+            //ViewBag.TotalLibros = Libros.Count.ToString();
+            return PartialView("Catalogo", Libros.ToList());
+        }
 
-
+        public PartialViewResult BuscarPorTitulo(string searchText)
+        {
+            CatalogoNegocio objCatalogo = new CatalogoNegocio();
+            var Libros = objCatalogo.BuscarPorTitulo(User.Identity.IsAuthenticated, searchText);
+            return PartialView("Catalogo", Libros.ToList());
+        }
     }
 }

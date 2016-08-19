@@ -2,25 +2,27 @@
 @{
     int i = 0;
     string itemtarget = string.Empty;
- }
- 
+}
+
 <div id="MainMenu">
     <div class="list-group panel">
         @{
+            <a href="/Catalogo" class="list-group-item list-group-item-success">Todos</a>
             foreach (var item in Model)
             {
+
                 i++;
                 itemtarget = "#Menu" + @i;
-                <a href="@itemtarget" class="list-group-item list-group-item-success" data-toggle="collapse" data-parent="#MainMenu">@item.NombreGrupo</a>
-                <div id="@itemtarget.Remove(0,1)" style="padding-left: 10px;" class="collapse" >
-                 
+                <a href="@itemtarget" level="1-@item.classId" class="list-group-item list-group-item-success" data-toggle="collapse" data-parent="#MainMenu">@item.NombreGrupo</a>
+                <div id="@itemtarget.Remove(0,1)" style="padding-left: 10px;" class="collapse">
+
                         @foreach (var item2 in item.NombresItems)
                         {
                             if (!item2.NombreGrupo.Contains("General"))
                             {
                                 i++;
                                 itemtarget = "#SubMenu" + @i;
-                                <a href="@itemtarget" data-parent="@itemtarget.Remove(0, 1)" style="background-color:#428bca; color:white;" class="list-group-item list-group-item-success" data-toggle="collapse">@item2.NombreGrupo</a>
+                                <a href="@itemtarget" level="2-@item.classId-@item2.classId" onclick="CargarCatalogoFiltrado(this);" data-parent="@itemtarget.Remove(0, 1)" style="background-color:#428bca; color:white;" class="list-group-item list-group-item-success" data-toggle="collapse">@item2.NombreGrupo</a>
                                 <div id="@itemtarget.Remove(0, 1)" style="padding-left: 5px;" class="collapse list-group-submenu list-group-submenu-1">
 
                                     @foreach (var item3 in item2.NombresItems)
@@ -28,7 +30,7 @@
                                         if (!item3.NombreGrupo.Contains("General"))
                                         {
                                             itemtarget = "#SubSubMenu" + @i;
-                                            <a href="@itemtarget" data-parent="@itemtarget.Remove(0, 1)" style="background-color:#f5f5f5;" class="list-group-item list-group-item-success" data-toggle="collapse">@item3.NombreGrupo</a>
+                                            <a href="@itemtarget" level="3-@item.classId-@item2.classId-@item3.classId" onclick="CargarCatalogoFiltrado(this);" data-parent="@itemtarget.Remove(0, 1)" style="background-color:#f5f5f5;" class="list-group-item list-group-item-success" data-toggle="collapse">@item3.NombreGrupo</a>
                                         }
                                     }
                                 </div>
@@ -39,70 +41,4 @@
             }
         }
     </div>
- </div>
-
-@*<div id="MainMenu">
-    <div class="list-group panel">
-        <a href="#demo3" class="list-group-item list-group-item-success" data-toggle="collapse" data-parent="#MainMenu">Item 3</a>
-        <div class="collapse" id="demo3">
-            <a href="#SubMenu1" class="list-group-item" data-toggle="collapse" data-parent="#SubMenu1">Subitem 1 <i class="fa fa-caret-down"></i></a>
-            <div class="collapse list-group-submenu" id="SubMenu1">
-                <a href="#" class="list-group-item" data-parent="#SubMenu1">Subitem 1 a</a>
-                <a href="#" class="list-group-item" data-parent="#SubMenu1">Subitem 2 b</a>
-                <a href="#SubSubMenu1" class="list-group-item" data-toggle="collapse" data-parent="#SubSubMenu1">Subitem 3 c <i class="fa fa-caret-down"></i></a>
-                <div class="collapse list-group-submenu list-group-submenu-1" id="SubSubMenu1">
-                    <a href="#" class="list-group-item" data-parent="#SubSubMenu1">Sub sub item 1</a>
-                    <a href="#" class="list-group-item" data-parent="#SubSubMenu1">Sub sub item 2</a>
-                </div>
-                <a href="#" class="list-group-item" data-parent="#SubMenu1">Subitem 4 d</a>
-            </div>
-            <a href="javascript:;" class="list-group-item">Subitem 2</a>
-            <a href="javascript:;" class="list-group-item">Subitem 3</a>
-        </div>
-        <a href="#demo4" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#MainMenu">Item 4</a>
-        <div class="collapse" id="demo4">
-            <a href="" class="list-group-item">Subitem 1</a>
-            <a href="" class="list-group-item">Subitem 2</a>
-            <a href="" class="list-group-item">Subitem 3</a>
-        </div>
-        <a href="#demo5" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#MainMenu">Item 5</a>
-        <div class="collapse" id="demo5">
-            <a href="#" class="list-group-item">Subitem 1</a>
-            <a href="" class="list-group-item">Subitem 2</a>
-            <a href="" class="list-group-item">Subitem 3</a>
-        </div>
-    </div>
-</div>*@
-
-@*<ul class="nav nav-pills nav-stacked left-menu" id="stacked-menu" style="box-shadow: 10px 10px 25px grey; border: 1px solid #a1a1a1;border-radius: 0 0 0 5px;background: #dddddd;">
-    @foreach (var item in Model)
-    {
-        i++;
-        itemtarget = "#item" + @i;
-        <li>
-            <a href="#" data-target="@itemtarget" data-toggle="collapse" data-parent="#stacked-menu"><span class="badge badge-warning">0</span> @item.class1_nombre<span class="caret arrow"></span></a>
-            @{
-                if (!String.IsNullOrEmpty(item.class2_nombre) && item.class2_nombre != "General")
-                {
-                    <ul class="nav nav-stacked collapse left-submenu" id="@itemtarget.Remove(0,1)">
-                        <li><a href="google.com">@item.class2_nombre</a></li>
-
-                    </ul>
-                }
-            }
-
-        </li>
-
-                    i++;
-                }
-    </ul>*@
-
-    @*<ul  id="clasficacionDiv" class="nav nav-stacked affix" style="box-shadow: 10px 10px 25px grey; border: 1px solid #a1a1a1;border-radius: 0 0 0 5px;background: #dddddd;">
-            <li class="active"><a href="#dropdowns"><i class="icon-chevron-right"></i> Categorias</a></li>
-            @foreach (var item in Model)
-            {
-                <li class=""><a href="#Clasificacion"><span class="badge badge-warning">@item.Items</span> @item.ClasificacionPrincipal</a></li>
-            }
-        </ul>*@
-
-
+</div>

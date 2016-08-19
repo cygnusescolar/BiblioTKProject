@@ -15,22 +15,24 @@ namespace BiblioTK.Negocio
             MenuRepositorio repo = new MenuRepositorio();
             List<ClasficacionPrincipalResult> lista = repo.ListarClasificaionesPrincipales();
 
-            //? creando el menu por clasificacion
             var arbolMenu = (from n1 in lista
-                             group n1 by n1.class1_nombre into grupo1
+                             group n1 by new { n1.class1_nombre, n1.class1_id} into grupo1
                              select new MenuResult
                              {
-                                 NombreGrupo = grupo1.Key.ToString(),
+                                 NombreGrupo = grupo1.Key.class1_nombre.ToString(),
+                                 classId = grupo1.Key.class1_id,
                                  NombresItems = (from n2 in grupo1
-                                                 group n2 by n2.class2_nombre into grupo2
+                                                 group n2 by new { n2.class2_nombre, n2.class2_id} into grupo2
                                                  select new MenuResult
                                                  {
-                                                     NombreGrupo = grupo2.Key.ToString(),
+                                                     NombreGrupo = grupo2.Key.class2_nombre.ToString(),
+                                                     classId = grupo2.Key.class2_id,
                                                      NombresItems = (from n3 in grupo2
-                                                                     group n3 by n3.class3_nombre into grupo3
+                                                                     group n3 by new { n3.class3_nombre, n3.class3_id } into grupo3
                                                                      select new MenuResult
                                                                      {
-                                                                         NombreGrupo = grupo3.Key,
+                                                                         NombreGrupo = grupo3.Key.class3_nombre,
+                                                                         classId = grupo3.Key.class3_id,
                                                                      }
                                                               ).ToList()
                                                  }
@@ -40,8 +42,7 @@ namespace BiblioTK.Negocio
 
 
                              }).ToList();
-
-
+            
             return arbolMenu;
         }
 

@@ -1,5 +1,12 @@
 ﻿@model BiblioTK.MVC.Models.CatalogoIndexModelView
 
+<style>
+
+    #h4Librosencontrados {
+    margin-top: 37px;
+ }
+
+</style>
 <div>
     <div class="row">
         <div class="col-sm-2 col-4 hidden-sm">
@@ -8,7 +15,10 @@
         <div class="col-sm-7 col-12">
             <div class="row">
                 <div class="container">
-                    <h2>Catalogo de Libros</h2>
+                    <h1 style="text-align:left;float:left;">Catalogo de Libros</h1>
+                    <h4 id="h4Librosencontrados" style="text-align:right;float:right;"></h4>
+                    <hr style="clear:both;">
+
                     <div id="DivLibros" class="list-group">
                         @*se carga via ajax*@
                     </div>

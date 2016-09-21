@@ -1,26 +1,21 @@
 ﻿Public Module FuncionesGenerales
 
     ''' <summary>
-    ''' Funcion para tomar la hora central de mexico
+    ''' Funcion para tomar la hora central de México. 
     ''' </summary>
     ''' <returns>hora central de mexico</returns>
-    Public Function Takoma_UTCToMexCentral() As DateTime
-        Dim FechaUTC As DateTime = Now.ToUniversalTime
-        Dim cstZone As TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time (Mexico)")
-        Dim cstTime As DateTime = TimeZoneInfo.ConvertTimeFromUtc(FechaUTC, cstZone)
-        Return cstTime
+    Public Function UtcToMexCentral() As Date
+        Return UtcToMexCentral(Date.Now.ToUniversalTime())
     End Function
 
     ''' <summary>
-    ''' sobrecarga 
+    ''' Funcion para tomar la hora central de México. 
     ''' </summary>
-    ''' <param name="vUTCDateTime"></param>
+    ''' <param name="universalTime"></param>
     ''' <returns>hora central de mexico</returns>
-    Public Function Takoma_UTCToMexCentral(vUTCDateTime As DateTime) As DateTime
-        Dim FechaUTC As DateTime = vUTCDateTime
-        Dim cstZone As TimeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time (Mexico)")
-        Dim cstTime As DateTime = TimeZoneInfo.ConvertTimeFromUtc(FechaUTC, cstZone)
-        Return cstTime
+    Public Function UtcToMexCentral(universalTime As Date) As Date
+        Dim timeZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time (Mexico)")
+        Return TimeZoneInfo.ConvertTimeFromUtc(universalTime, timeZone)
     End Function
 
 End Module

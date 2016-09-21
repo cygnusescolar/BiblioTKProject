@@ -43,7 +43,8 @@ namespace BiblioTK.DAL.DataModel
         public string cat_Upload_Tipo { get; set; }
         public string cat_Upload_Link { get; set; }
         public byte cat_status { get; set; }
-    
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey("catalogo_uid")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_BiblioTK_Catalogo_Autores> tbl_BiblioTK_Catalogo_Autores { get; set; }
         public virtual tbl_BiblioTK_class4 tbl_BiblioTK_class4 { get; set; }

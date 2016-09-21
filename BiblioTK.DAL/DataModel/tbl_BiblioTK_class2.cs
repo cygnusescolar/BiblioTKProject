@@ -12,6 +12,8 @@ namespace BiblioTK.DAL.DataModel
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class tbl_BiblioTK_class2
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,6 +23,7 @@ namespace BiblioTK.DAL.DataModel
         }
         [Key]
         public string class1_id { get; set; }
+        [ForeignKey("tbl_BiblioTK_class1")]
         public string class2_id { get; set; }
         public string class2_nombre { get; set; }
     

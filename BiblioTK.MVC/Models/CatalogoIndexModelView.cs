@@ -15,8 +15,9 @@ namespace BiblioTK.MVC.Models
     {
 
         public List<CatalogoResult> Libros { get; set; }
-        public List<ClasficacionPrincipalResult> ClasificacionPrincipalMenu { get; set; }
+        public List<MenuResult> ClasificacionPrincipalMenu { get; set; }
         public List<CatalogoResult> Top10Menu { get; set; }
         public List<CatalogoResult> NuevosMaterialesMenu { get; set; }
+
     }
 }

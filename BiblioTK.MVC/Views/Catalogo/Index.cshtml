@@ -1,35 +1,43 @@
 ﻿@model BiblioTK.MVC.Models.CatalogoIndexModelView
-@{
-    var modelo = Model;
+
+<style>
+
+    #h4Librosencontrados {
+    margin-top: 37px;
  }
+
+</style>
 <div>
     <div class="row">
         <div class="col-sm-2 col-4 hidden-sm">
- 
-            @{Html.RenderPartial("ClasificacionPrincipalMenu", Model.ClasificacionPrincipalMenu);}
-
+                @Html.Partial("ClasificacionPrincipalMenu", Model.ClasificacionPrincipalMenu)
         </div>
         <div class="col-sm-7 col-12">
             <div class="row">
                 <div class="container">
-                    <h2>Catalogo de Libros</h2>
+                    <h1 style="text-align:left;float:left;">Catalogo de Libros</h1>
+                    <h4 id="h4Librosencontrados" style="text-align:right;float:right;"></h4>
+                    <hr style="clear:both;">
+
                     <div id="DivLibros" class="list-group">
                         @*se carga via ajax*@
                     </div>
                 </div>
                 <div id="progress" style="display:none">
                     <h4>Cargando...</h4>
-                </div>             
+                </div>
             </div>
         </div>
         <div class="col-sm-3 col-4 hidden-sm">
             <div class="sidebar-nav-fixed pull-right affix">
-                @{Html.RenderPartial("Top10", Model.Top10Menu);}
-                @{Html.RenderPartial("NuevosMateriales", Model.NuevosMaterialesMenu);}
+                @Html.Partial("Top10", Model.Top10Menu)
+                @Html.Partial("NuevosMateriales", Model.NuevosMaterialesMenu)
             </div>
         </div>
 
     </div>
- 
+
 </div>
+@*este archivo javascript carga el metodo GetData para listar los 10 siguientes libros del catalogo (paginado)*@
 <script src="~/Scripts/catalogoGetData.js"></script>
+

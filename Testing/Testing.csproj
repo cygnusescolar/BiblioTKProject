@@ -61,7 +61,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Repositorios\UnitTestRepositorioCatalogo.cs" />
-    <Compile Include="UnitTestFuncionesVB.cs" />
+    <Compile Include="FuncionesGeneralesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

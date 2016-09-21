@@ -1,13 +1,46 @@
 ﻿@model IEnumerable<BiblioTK.Modelos.CatalogoResult>
+@{
+    string youtubeIcon = "color:black;";
+    string acrobatIcon = "color:black";
+    string classStyle = string.Empty;
 
+    if (User.Identity.IsAuthenticated)
+    {
+        youtubeIcon = "color:blue;";
+        acrobatIcon = "color:red";
+    }
+}
 <div class="well">
     <h3><a href="http://getbootstrap.com">Top 10/7 Dias</a></h3>
     @foreach (var item in Model)
     {
+        switch (item.Tipo)
+        {
+            case "PDF":
+                classStyle = "<i class='fa fa-file-pdf-o' style='" + acrobatIcon + "'></i>";
+                break;
+            case "YOUTUBE":
+                classStyle = "<i class='fa fa-youtube-play' style='" + youtubeIcon + "'></i>";
+                break;
+            default:
+                classStyle = "<i class='fa fa-external-link' style='" + youtubeIcon + "'></i>";
+                break;
+        }
+
         var inverso = item.cat_Titulo.Length - (item.cat_Titulo.Length / 2);
         if (inverso > 20)
-        {<small><a href="#">@item.cat_Titulo.Substring(0, inverso).ToString() ...</a></small><br />}
+        {
+            <small>
+                @Html.Raw(classStyle)
+                <a href="@Url.Action("CargarLibro", "Catalogo", new { idLibro = item.catalogo_uid })">@item.cat_Titulo.Substring(0, inverso).ToString() ...</a>
+            </small>
+            <br />
+        }
         else
-        {    <small><a href="#">@item.cat_Titulo</a></small><br />}
+        {   <small>
+                @Html.Raw(classStyle)
+                <a href="@Url.Action("CargarLibro", "Catalogo",  new { idLibro = item.catalogo_uid })">@item.cat_Titulo</a>
+            </small><br />
+        }
     }
 </div>

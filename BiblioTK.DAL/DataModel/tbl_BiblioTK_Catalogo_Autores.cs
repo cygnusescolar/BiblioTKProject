@@ -12,11 +12,13 @@ namespace BiblioTK.DAL.DataModel
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class tbl_BiblioTK_Catalogo_Autores
     {
         [Key]
         public System.Guid catalogo_uid { get; set; }
-        public System.Guid autor_uid { get; set; }
+         public System.Guid autor_uid { get; set; }
         public byte autor_tipo { get; set; }
     
         public virtual tbl_BiblioTK_Autores tbl_BiblioTK_Autores { get; set; }

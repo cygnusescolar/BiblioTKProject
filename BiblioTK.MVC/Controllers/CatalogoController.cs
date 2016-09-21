@@ -8,7 +8,8 @@ using System.Web.Caching;
 using Microsoft.AspNet.Identity.Owin;
 using BiblioTK.MVC.Models;
 using BiblioTK.Modelos;
- 
+using FuncionesVB;
+
 namespace BiblioTK.MVC.Controllers
 {
     public class CatalogoController : Controller
@@ -59,7 +60,7 @@ namespace BiblioTK.MVC.Controllers
             MenuNegocio objMenu = new MenuNegocio();
             modelo.ClasificacionPrincipalMenu = objMenu.ListarClasificaionesPrincipales();
 
-            modelo.Top10Menu = objMenu.ListarTop10(FuncionesVB.FuncionesGenerales.Takoma_UTCToMexCentral());
+            modelo.Top10Menu = objMenu.ListarTop10(FuncionesGenerales.UtcToMexCentral());
             modelo.NuevosMaterialesMenu = objMenu.NuevosMateriales();
 
             return View(modelo);

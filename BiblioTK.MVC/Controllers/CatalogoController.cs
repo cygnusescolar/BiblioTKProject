@@ -93,10 +93,10 @@ namespace BiblioTK.MVC.Controllers
             return PartialView("Catalogo", Libros.ToList());
         }
 
-        public PartialViewResult BuscarPorTitulo(string searchText)
+        public PartialViewResult BuscarPorTitulo(string searchText, int pageIndex, int pageSize)
         {
             CatalogoNegocio objCatalogo = new CatalogoNegocio();
-            var Libros = objCatalogo.BuscarPorTitulo(User.Identity.IsAuthenticated, searchText);
+            var Libros = objCatalogo.BuscarPorTitulo(User.Identity.IsAuthenticated, searchText, pageIndex, pageSize);
             return PartialView("Catalogo", Libros.ToList());
         }
     }

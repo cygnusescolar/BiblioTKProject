@@ -10,35 +10,33 @@
             <a href="/Catalogo" class="list-group-item list-group-item-success">Todos</a>
             foreach (var item in Model)
             {
-
                 i++;
                 itemtarget = "#Menu" + @i;
-                <a href="@itemtarget" level="1-@item.classId" class="list-group-item list-group-item-success" data-toggle="collapse" data-parent="#MainMenu">@item.NombreGrupo</a>
-                <div id="@itemtarget.Remove(0,1)" style="padding-left: 10px;" class="collapse">
-
-                        @foreach (var item2 in item.NombresItems)
-                        {
-                            if (!item2.NombreGrupo.Contains("General"))
+                     <a href="@itemtarget" level="1-@item.classId" @(item.NombresItems.Count == 1 ? "onclick=CargarCatalogoFiltrado(this,true);" : "") class="list-group-item list-group-item-success" data-toggle="collapse" data-parent="#MainMenu">@item.NombreGrupo</a>
+                        <div id="@itemtarget.Remove(0,1)" style="padding-left: 10px;" class="collapse">
+                            @foreach (var item2 in item.NombresItems)
                             {
-                                i++;
-                                itemtarget = "#SubMenu" + @i;
-                                <a href="@itemtarget" level="2-@item.classId-@item2.classId" onclick="CargarCatalogoFiltrado(this);" data-parent="@itemtarget.Remove(0, 1)" style="background-color:#428bca; color:white;" class="list-group-item list-group-item-success" data-toggle="collapse">@item2.NombreGrupo</a>
-                                <div id="@itemtarget.Remove(0, 1)" style="padding-left: 5px;" class="collapse list-group-submenu list-group-submenu-1">
+                                if (!item2.NombreGrupo.Contains("General"))
+                                {
+                                    i++;
+                                    itemtarget = "#SubMenu" + @i;
+                                    <a href="@itemtarget" level="2-@item.classId-@item2.classId" onclick="CargarCatalogoFiltrado(this, true);" data-parent="@itemtarget.Remove(0, 1)" style="background-color:#428bca; color:white;" class="list-group-item list-group-item-success" data-toggle="collapse">@item2.NombreGrupo</a>
+                                    <div id="@itemtarget.Remove(0, 1)" style="padding-left: 5px;" class="collapse list-group-submenu list-group-submenu-1">
 
-                                    @foreach (var item3 in item2.NombresItems)
-                                    {
-                                        if (!item3.NombreGrupo.Contains("General"))
+                                        @foreach (var item3 in item2.NombresItems)
                                         {
-                                            itemtarget = "#SubSubMenu" + @i;
-                                            <a href="@itemtarget" level="3-@item.classId-@item2.classId-@item3.classId" onclick="CargarCatalogoFiltrado(this);" data-parent="@itemtarget.Remove(0, 1)" style="background-color:#f5f5f5;" class="list-group-item list-group-item-success" data-toggle="collapse">@item3.NombreGrupo</a>
+                                            if (!item3.NombreGrupo.Contains("General"))
+                                            {
+                                                itemtarget = "#SubSubMenu" + @i;
+                                                <a href="@itemtarget" level="3-@item.classId-@item2.classId-@item3.classId" onclick="CargarCatalogoFiltrado(this, true);" data-parent="@itemtarget.Remove(0, 1)" style="background-color:#f5f5f5;" class="list-group-item list-group-item-success" data-toggle="collapse">@item3.NombreGrupo</a>
+                                            }
                                         }
-                                    }
-                                </div>
+                                    </div>
 
+                                }
                             }
-                        }
-                    </div>
+                        </div>
             }
-        }
-    </div>
+         }
+</div>
 </div>

@@ -34,14 +34,14 @@
         {
             <small>
                 @Html.Raw(classStyle)
-                <a href="@Url.Action("CargarLibro", "Catalogo", new { idLibro = item.catalogo_uid })">@item.cat_Titulo.Substring(0, inverso).ToString() ...</a>
+                <a href="@Url.Action("CargarLibro", "Catalogo", new { idLibro = item.catalogo_uid })" data-toggle="tooltip" data-placement="left" title="@item.cat_Titulo">@item.cat_Titulo.Substring(0, inverso).ToString() ...</a>
             </small>
             <br />
         }
         else
         {   <small>
             @Html.Raw(classStyle)
-            <a href="@Url.Action("CargarLibro", "Catalogo",  new { idLibro = item.catalogo_uid })">@item.cat_Titulo</a>
+            <a href="@Url.Action("CargarLibro", "Catalogo",  new { idLibro = item.catalogo_uid })" title="@item.cat_Titulo">@item.cat_Titulo</a>
             </small><br />
         }
     }

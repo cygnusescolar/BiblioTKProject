@@ -39,17 +39,20 @@
                     var pageName = ViewContext.RouteData.Values["controller"].ToString();
                     if (User.Identity.IsAuthenticated && pageName == "Catalogo")
                     {
-                        using (Ajax.BeginForm("BuscarPorTitulo", "Catalogo", new AjaxOptions
+                        using (Ajax.BeginForm("BuscarPorTitulo", "Catalogo", new { pageIndex = 0, pageSize = 10 }, new AjaxOptions
                         {
-                            InsertionMode = InsertionMode.Replace, 
-                            UpdateTargetId = "divResultados",
-                            LoadingElementId = "progress"
-                        }, new { @class="navbar-form" }))
+                            InsertionMode = InsertionMode.Replace,
+                            UpdateTargetId = "DivLibros",
+                            LoadingElementId = "progress",
+                            OnBegin = "onSubmitFeedbackBegin",
+                            OnSuccess = "onSuccess"
+                        }, new { @class = "navbar-form" }))
                         {
+                            @Html.AntiForgeryToken()
                             <div class="form-group" style="display:inline;">
                                 <div class="input-group">
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-                                    <input class="form-control" name="searchText" placeholder="Buscar" autocomplete="off" autofocus="autofocus" type="text">
+                                    <input class="form-control" id="searchText" name="searchText" placeholder="Buscar" autocomplete="off" autofocus="autofocus" type="text">
                                 </div>
                             </div>
                         }
@@ -90,7 +93,7 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-
+            $('[data-toggle="tooltip"]').tooltip();
             GetData();
             $(window).unbind('scroll');//!esta linea sirve para que GetData no sea llamado dos veces al hacer scroll down.
             $(window).scroll(function () {

@@ -85,9 +85,11 @@ namespace BiblioTK.Negocio
         public List<CatalogoResult> ListarCatalogoPorMenu(string niveles, bool isAuthenticated, int TamanoPagina, int PaginaActual)
         {
             string[] levels = niveles.Split('-').ToArray();
-            string nivel1 = "+";
-            string nivel2 = "+";
-            string nivel3 = "+";
+            string nivel1 = null;
+            string nivel2 = null;
+            string nivel3 = null;
+
+           
 
             switch (int.Parse(levels[0]))
             {
@@ -103,14 +105,41 @@ namespace BiblioTK.Negocio
                     nivel2 = levels[2];
                     nivel3 = levels[3];
                     break;
-                default:
-                    break;
             }
             repo = new CatalogoRepositorio();
-            List<CatalogoResult> listaCatalogos = repo.ListarCatalogoPorMenu(nivel1, nivel2, nivel3, TamanoPagina, PaginaActual);
+            List<CatalogoResult> listaCatalogos = repo.ListarCatalogoPorMenu(nivel1, nivel2, nivel3, TamanoPagina, PaginaActual, true);
             ConfigurarEnlaceYouTube(listaCatalogos);
             ConfigurarRutaImagen(isAuthenticated, listaCatalogos);
             return listaCatalogos;
+
+
+            //string[] levels = niveles.Split('-').ToArray();
+            //string nivel1 = "+";
+            //string nivel2 = "+";
+            //string nivel3 = "+";
+
+            //switch (int.Parse(levels[0]))
+            //{
+            //    case 1:
+            //        nivel1 = levels[1];
+            //        break;
+            //    case 2:
+            //        nivel1 = levels[1];
+            //        nivel2 = levels[2];
+            //        break;
+            //    case 3:
+            //        nivel1 = levels[1];
+            //        nivel2 = levels[2];
+            //        nivel3 = levels[3];
+            //        break;
+            //    default:
+            //        break;
+            //}
+            //repo = new CatalogoRepositorio();
+            //List<CatalogoResult> listaCatalogos = repo.ListarCatalogoPorMenu(nivel1, nivel2, nivel3, TamanoPagina, PaginaActual);
+            //ConfigurarEnlaceYouTube(listaCatalogos);
+            //ConfigurarRutaImagen(isAuthenticated, listaCatalogos);
+            //return listaCatalogos;
         }
 
         private static void ConfigurarRutaImagen(bool isAuthenticated, List<CatalogoResult> listaCatalogos)
@@ -150,10 +179,10 @@ namespace BiblioTK.Negocio
             });
         }
 
-        public List<CatalogoResult> BuscarPorTitulo(bool isAuthenticated, string NombreLibro)
+        public List<CatalogoResult> BuscarPorTitulo(bool isAuthenticated, string NombreLibro, int pageIndex, int pageSize)
         {
             repo = new CatalogoRepositorio();
-            List<CatalogoResult> listaCatalogos = repo.ListarPorNombre(NombreLibro);
+            List<CatalogoResult> listaCatalogos = repo.ListarPorNombre(NombreLibro, pageSize, pageIndex);
             ConfigurarEnlaceYouTube(listaCatalogos);
             ConfigurarRutaImagen(isAuthenticated, listaCatalogos);
 

@@ -89,8 +89,6 @@ namespace BiblioTK.Negocio
             string nivel2 = null;
             string nivel3 = null;
 
-           
-
             switch (int.Parse(levels[0]))
             {
                 case 1:
@@ -111,35 +109,7 @@ namespace BiblioTK.Negocio
             ConfigurarEnlaceYouTube(listaCatalogos);
             ConfigurarRutaImagen(isAuthenticated, listaCatalogos);
             return listaCatalogos;
-
-
-            //string[] levels = niveles.Split('-').ToArray();
-            //string nivel1 = "+";
-            //string nivel2 = "+";
-            //string nivel3 = "+";
-
-            //switch (int.Parse(levels[0]))
-            //{
-            //    case 1:
-            //        nivel1 = levels[1];
-            //        break;
-            //    case 2:
-            //        nivel1 = levels[1];
-            //        nivel2 = levels[2];
-            //        break;
-            //    case 3:
-            //        nivel1 = levels[1];
-            //        nivel2 = levels[2];
-            //        nivel3 = levels[3];
-            //        break;
-            //    default:
-            //        break;
-            //}
-            //repo = new CatalogoRepositorio();
-            //List<CatalogoResult> listaCatalogos = repo.ListarCatalogoPorMenu(nivel1, nivel2, nivel3, TamanoPagina, PaginaActual);
-            //ConfigurarEnlaceYouTube(listaCatalogos);
-            //ConfigurarRutaImagen(isAuthenticated, listaCatalogos);
-            //return listaCatalogos;
+            
         }
 
         private static void ConfigurarRutaImagen(bool isAuthenticated, List<CatalogoResult> listaCatalogos)

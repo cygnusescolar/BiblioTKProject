@@ -100,7 +100,11 @@ namespace BiblioTK.Infraestructura.Repositorios
             {
                 //return context.tbl_BiblioTK_Catalogo.Where(x => x.cat_Titulo.Contains(NombreLibro)).ToList();
                 var libros = (from q in context.tbl_BiblioTK_Catalogo_Autores
-                              where q.tbl_BiblioTK_Catalogo.cat_Titulo.Contains(NombreLibro)
+                              where q.tbl_BiblioTK_Catalogo.cat_Titulo.Contains(NombreLibro) ||
+                              q.tbl_BiblioTK_Autores.autor_apellido_paterno.Contains(NombreLibro) ||
+                              q.tbl_BiblioTK_Autores.autor_apellido_materno.Contains(NombreLibro) ||
+                              q.tbl_BiblioTK_Autores.autor_nombre.Contains(NombreLibro) ||
+                              q.tbl_BiblioTK_Catalogo.cat_Año.Contains(NombreLibro)
                               orderby
                                 q.tbl_BiblioTK_Catalogo.cat_Titulo
                               select new CatalogoResult

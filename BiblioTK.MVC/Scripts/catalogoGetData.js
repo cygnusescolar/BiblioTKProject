@@ -44,7 +44,7 @@ function CargarCatalogoFiltrado(elementoA, filtroMenu) {
     { $("#DivLibros").html(''); pageIndex = 0; nivel = niveles; }
     
     var searchText = $("#searchText").val();
-    if (searchText == "") {
+    if (searchText == "" || searchText == undefined) {
         $.ajax({
         type: 'POST',
         url: '/Catalogo/CargarCatalogoFiltrado',
@@ -107,7 +107,11 @@ function onSubmitFeedbackBegin(context) {
      pageIndex = 1; $(window).scrollTop(0);
  }
 
-function onSuccess(context) {
-     filtrado = true;
+function onSuccess(context) {    
+    var searchText = $("#searchText").val();
+    if (searchText == "") 
+        filtrado = false;
+    else
+        filtrado = true;
 }
  

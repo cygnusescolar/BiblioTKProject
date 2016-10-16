@@ -5,30 +5,90 @@
     #h4Librosencontrados {
     margin-top: 37px;
  }
+   .inputBusqueda {
+    display: block;
+    width: 100%; 
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #555555;
+    vertical-align: middle;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+   
+input {
+    max-width: 100%;
+}
 
 </style>
 <div>
     <div class="row">
-        <div class="col-sm-2 col-4 hidden-sm">
-                @Html.Partial("ClasificacionPrincipalMenu", Model.ClasificacionPrincipalMenu)
+        <div class="col-sm-2 col-4 visible-lg visible-md">
+            @Html.Partial("ClasificacionPrincipalMenu", Model.ClasificacionPrincipalMenu)
         </div>
         <div class="col-sm-7 col-12">
             <div class="row">
                 <div class="container">
-                    <h1 style="text-align:left;float:left;">Catalogo de Libros</h1>
-                    <h4 id="h4Librosencontrados" style="text-align:right;float:right;"></h4>
+                    <h1>Catalogo de Libros</h1>
                     <hr style="clear:both;">
 
-                    <div id="DivLibros" class="list-group">
-                        @*se carga via ajax*@
+                     @*Menu tabs*@
+                    <div id="divToggle">
+                        <h4><a href="#Filtro"> Filtros <i class="fa fa-filter" aria-hidden="true"></i> </a></h4>
                     </div>
-                </div>
+                    <div id="divFiltros" style="display:none;">
+                        @*<input id="inputBusqueda" class="hidden-lg" placeholder="Buscar" autocomplete="off" autofocus="autofocus" type="text">*@
+
+                        @{
+                            var pageName = ViewContext.RouteData.Values["controller"].ToString();
+                            if (User.Identity.IsAuthenticated && pageName == "Catalogo")
+                            {
+                                using (Ajax.BeginForm("BuscarPorTitulo", "Catalogo", new { pageIndex = 0, pageSize = 10 }, new AjaxOptions
+                                {
+                                    InsertionMode = InsertionMode.Replace,
+                                    UpdateTargetId = "DivLibros",
+                                    LoadingElementId = "progress",
+                                    OnBegin = "onSubmitFeedbackBegin",
+                                    OnSuccess = "onSuccess"
+                                }, new { @class = "navbar-form hidden-lg" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div class="form-group" style="display:inline;">
+                                        <div class="input-group"> 
+                                            <input class="inputBusqueda" id="searchText" name="searchText" placeholder="Buscar" autocomplete="off" autofocus="autofocus" type="text">
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+
+                        <ul class="nav nav-tabs" id="myTab">
+                            <li class="active"><a onclick="ListarTodos();" style="cursor:pointer;" data-target="#home" data-toggle="tab">Todos</a></li>
+                            <li><a onclick="ListarPorTipo('Tutoriales', true);" style="cursor:pointer;" data-target="#profile" data-toggle="tab">Tutoriales</a></li>
+                            <li><a onclick="ListarPorTipo('Videos', true);" style="cursor:pointer;" data-target="#messages" data-toggle="tab">Videos</a></li>
+                        </ul>
+                    </div>
+                         @*fin menu*@
+                        @*<h4 id="h4Librosencontrados" style="text-align:right;float:right;"></h4>*@
+
+                        <div id="DivLibros" class="list-group">
+                            @*se carga via ajax*@
+                        </div>
+                    </div>
                 <div id="progress" style="display:none">
                     <h4>Cargando...</h4>
                 </div>
             </div>
         </div>
-        <div class="col-sm-3 col-4 hidden-sm">
+        
+        <div class="col-sm-3 col-4 visible-lg visible-md">
             <div class="sidebar-nav-fixed pull-right affix">
                 @Html.Partial("Top10", Model.Top10Menu)
                 @Html.Partial("NuevosMateriales", Model.NuevosMaterialesMenu)
@@ -38,6 +98,7 @@
     </div>
 
 </div>
-@*este archivo javascript carga el metodo GetData para listar los 10 siguientes libros del catalogo (paginado)*@
-<script src="~/Scripts/catalogoGetData.js"></script>
 
+
+<script src="~/Scripts/catalogoGetData.js">
+</script>

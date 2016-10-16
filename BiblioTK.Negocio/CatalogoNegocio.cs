@@ -159,5 +159,16 @@ namespace BiblioTK.Negocio
             return listaCatalogos;
         }
 
+        public List<CatalogoResult> ListarPorTipo(string Tipo, bool isAuthenticated, int pageIndex, int pageSize)
+        {
+            repo = new CatalogoRepositorio();
+            List<CatalogoResult> listaCatalogos = repo.ListarPorTipo(Tipo, pageSize, pageIndex);
+            ConfigurarEnlaceYouTube(listaCatalogos);
+            ConfigurarRutaImagen(isAuthenticated, listaCatalogos);
+
+            return listaCatalogos;
+        }
+
+
     }
 }

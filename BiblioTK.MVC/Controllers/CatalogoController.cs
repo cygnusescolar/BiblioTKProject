@@ -9,60 +9,21 @@ using Microsoft.AspNet.Identity.Owin;
 using BiblioTK.MVC.Models;
 using BiblioTK.Modelos;
 using FuncionesVB;
+using System.Web.UI;
 
 namespace BiblioTK.MVC.Controllers
 {
     public class CatalogoController : Controller
     {
-        //private ApplicationSignInManager _signInManager;
-        //private ApplicationUserManager _userManager;
-
-        //public CatalogoController()
-        //{
-        //}
-
-        //public CatalogoController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
-        //{
-        //    UserManager = userManager;
-        //    SignInManager = signInManager;
-        //}
-        //public ApplicationSignInManager SignInManager
-        //{
-        //    get
-        //    {
-        //        return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-        //    }
-        //    private set
-        //    {
-        //        _signInManager = value;
-        //    }
-        //}
-
-        //public ApplicationUserManager UserManager
-        //{
-        //    get
-        //    {
-        //        return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-        //    }
-        //    private set
-        //    {
-        //        _userManager = value;
-        //    }
-        //}
-
-        // GET: Catalogo
-
-        //[OutputCache(Duration = 1800)] //? cache con duracion de 30 minutos para que no llame a BD en cada request 
+ 
+        [OutputCache(NoStore = true, Duration = 30, VaryByCustom = "User")]
         public ActionResult Index()
         {
             CatalogoIndexModelView modelo = new CatalogoIndexModelView();
-            CatalogoNegocio objCatalogo = new CatalogoNegocio();
             MenuNegocio objMenu = new MenuNegocio();
             modelo.ClasificacionPrincipalMenu = objMenu.ListarClasificaionesPrincipales();
-
             modelo.Top10Menu = objMenu.ListarTop10(FuncionesGenerales.UtcToMexCentral());
             modelo.NuevosMaterialesMenu = objMenu.NuevosMateriales();
-
             return View(modelo);
         }
 
@@ -72,7 +33,7 @@ namespace BiblioTK.MVC.Controllers
         {
             CatalogoNegocio objCatalogo = new CatalogoNegocio();
             var Libros = objCatalogo.listarCatalogoPorSPPaginado(pageSize, pageIndex, User.Identity.IsAuthenticated);
-           return PartialView("Catalogo", Libros.ToList());
+            return PartialView("Catalogo", Libros.ToList());
 
         }
 
@@ -80,7 +41,7 @@ namespace BiblioTK.MVC.Controllers
         public ActionResult CargarLibro(string idLibro)
         {
             CatalogoNegocio objCatalogo = new CatalogoNegocio();
-            string urliframe = objCatalogo.ObtenerUrlIframe(idLibro);  
+            string urliframe = objCatalogo.ObtenerUrlIframe(idLibro);
             return View("Libro", null, urliframe);
         }
 
@@ -97,6 +58,14 @@ namespace BiblioTK.MVC.Controllers
         {
             CatalogoNegocio objCatalogo = new CatalogoNegocio();
             var Libros = objCatalogo.BuscarPorTitulo(User.Identity.IsAuthenticated, searchText, pageIndex, pageSize);
+            return PartialView("Catalogo", Libros.ToList());
+        }
+
+        public PartialViewResult ListarPorTipo(string Tipo, int pageIndex, int pageSize)
+        { 
+            Tipo = (Tipo == "Videos") ? "YOUTUBE" : "LINK" ;
+            CatalogoNegocio objCatalogo = new CatalogoNegocio();
+            var Libros = objCatalogo.ListarPorTipo(Tipo, User.Identity.IsAuthenticated, pageIndex, pageSize);
             return PartialView("Catalogo", Libros.ToList());
         }
     }

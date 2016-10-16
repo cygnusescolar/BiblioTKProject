@@ -2,12 +2,18 @@
 var pageIndex = 0;
 var filtrado = false;
 var nivel;
-
+var filtro;
+ 
 function GetData() {
-    if (filtrado == false)
+    if (filtrado == false) {
         CargarCatalogo();
-    else
-        CargarCatalogoFiltrado();
+    }
+    else {
+        if (filtro)
+            ListarPorTipo(filtro);
+        else
+            CargarCatalogoFiltrado();
+    }
 
 }
 
@@ -33,7 +39,6 @@ function CargarCatalogo() {
     });
 }
 
-
 function CargarCatalogoFiltrado(elementoA, filtroMenu) {
     if (filtrado == false || filtroMenu) {
         pageIndex = 0; $("#searchText").val("");
@@ -43,7 +48,7 @@ function CargarCatalogoFiltrado(elementoA, filtroMenu) {
     if(nivel != niveles)
     { $("#DivLibros").html(''); pageIndex = 0; nivel = niveles; }
     
-    var searchText = $("#searchText").val();
+    var searchText = ($("#searchText").val()) ? $("#searchText").val() : $(".inputBusqueda").val();
     if (searchText == "" || searchText == undefined) {
         $.ajax({
         type: 'POST',
@@ -108,10 +113,50 @@ function onSubmitFeedbackBegin(context) {
  }
 
 function onSuccess(context) {    
-    var searchText = $("#searchText").val();
+    var searchText = ($("#searchText").val()) ? $("#searchText").val() : $(".inputBusqueda").val();
     if (searchText == "") 
         filtrado = false;
     else
         filtrado = true;
 }
  
+
+function ListarPorTipo(tipo, fromTab) {
+
+    if (fromTab)
+    { $("#DivLibros").html(''); pageIndex = 0; $("#searchText").val(""); $(".inputBusqueda").val(""); }
+
+    $.ajax({
+        type: 'POST',
+        url: '/Catalogo/ListarPorTipo',
+        data: { "Tipo": tipo, "pageindex": pageIndex, "pagesize": pageSize },
+        dataType: 'html',
+        success: function (result) {
+            $("#DivLibros").append(result);
+            pageIndex++;
+            filtro = tipo;
+            filtrado = true;
+        },
+        beforeSend: function () {
+            $("#progress").show();
+        },
+        complete: function () {
+            $("#progress").hide();
+        },
+        error: function (request, status, error) {
+            alert("ha ocurrido algo. Intenta de nuevo. " + request.responseText + error);
+        }
+    });
+}
+
+
+function ListarTodos() {
+
+    $("#DivLibros").html('');
+    $("#searchText").val("");
+    pageIndex = 0;
+    filtrado = false;
+
+    CargarCatalogo();
+
+ }

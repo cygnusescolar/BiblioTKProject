@@ -49,7 +49,7 @@ namespace BiblioTK.Negocio
         public List<CatalogoResult> ListarTop10(DateTime fecha)
         {
             MenuRepositorio repo = new MenuRepositorio();
-            List<CatalogoResult> lista = repo.ListarTop24(fecha.AddDays(-1)); //fechahora de mexico menos un dia
+            List<CatalogoResult> lista = repo.ListarTop24(fecha.AddDays(-7)); //fechahora de mexico menos un dia
             return lista;
         }
 

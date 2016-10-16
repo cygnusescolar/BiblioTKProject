@@ -17,5 +17,12 @@ namespace BiblioTK.MVC
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        public override string GetVaryByCustomString(HttpContext context, string custom)
+        {
+            return "User".Equals(custom, StringComparison.OrdinalIgnoreCase)
+                ? User.Identity.Name
+                : base.GetVaryByCustomString(context, custom);
+        }
     }
 }

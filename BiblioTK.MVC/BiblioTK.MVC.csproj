@@ -219,6 +219,7 @@
     <Content Include="Content\images\acrobatColor80.png" />
     <Content Include="Content\images\LINKBlanco.png" />
     <Content Include="Content\images\LINKColor.png" />
+    <Content Include="Content\images\loader.gif" />
     <Content Include="Content\images\netImage.jpg" />
     <Content Include="Content\images\youtubeBlanco.png" />
     <Content Include="Content\images\youtubeColor.png" />

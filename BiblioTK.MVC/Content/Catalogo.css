@@ -44,3 +44,12 @@
     width: 33.33333%;
   }
 }
+
+.progressMenuGif {
+    text-align: center;
+    position: relative;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}

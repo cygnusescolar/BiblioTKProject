@@ -68,5 +68,16 @@ namespace BiblioTK.MVC.Controllers
             var Libros = objCatalogo.ListarPorTipo(Tipo, User.Identity.IsAuthenticated, pageIndex, pageSize);
             return PartialView("Catalogo", Libros.ToList());
         }
+
+        [AjaxOnly]
+        public PartialViewResult recargarMenuLeft()
+        {
+            CatalogoIndexModelView modelo = new CatalogoIndexModelView();
+            MenuNegocio objMenu = new MenuNegocio();
+            modelo.ClasificacionPrincipalMenu = objMenu.ListarClasificaionesPrincipales();
+ 
+            return PartialView("ClasificacionPrincipalMenu", modelo.ClasificacionPrincipalMenu);
+        }
+
     }
 }

@@ -126,7 +126,7 @@ function onSuccess(context) {
 function ListarPorTipo(tipo, fromTab) {
 
     if (fromTab)
-    { $("#DivLibros").html(''); pageIndex = 0; $("#searchText").val(""); $(".inputBusqueda").val(""); }
+    { $("#DivLibros").html(''); pageIndex = 0; $("#searchText").val(""); $("#inputBusqueda").val(""); }
     if(tipo == undefined) tipo = filtro
     $.ajax({
         type: 'POST',

@@ -2,15 +2,15 @@
 var pageIndex = 0;
 var filtrado = false;
 var nivel;
-var filtro;
+var filtroTab;
  
 function GetData() {
     if (filtrado == false) {
         CargarCatalogo();
     }
     else {
-        if (filtro)
-            ListarPorTipo(filtro);
+        if (filtroTab)
+            ListarPorTipo(filtroTab);
         else
             CargarCatalogoFiltrado();
     }
@@ -41,8 +41,8 @@ function CargarCatalogo() {
     });
 }
 
-function CargarCatalogoFiltrado(elementoA, filtroMenu) {
-    if (filtrado == false || filtroMenu) {
+function CargarCatalogoFiltrado(elementoA, filtroTabMenu) {
+    if (filtrado == false || filtroTabMenu) {
         pageIndex = 0; $("#searchText").val("");
     }
 
@@ -50,7 +50,7 @@ function CargarCatalogoFiltrado(elementoA, filtroMenu) {
     if(nivel != niveles)
     { $("#DivLibros").html(''); pageIndex = 0; nivel = niveles; }
     
-    var searchText = ($("#searchText").val()) ? $("#searchText").val() : $(".inputBusqueda").val();
+    var searchText = ($("#searchText").val()) ? $("#searchText").val() : $("#inputBusqueda").val();
     if (searchText == "" || searchText == undefined) {
         $.ajax({
         type: 'POST',
@@ -115,11 +115,11 @@ function onSubmitFeedbackBegin(context) {
  }
 
 function onSuccess(context) {    
-    var searchText = ($("#searchText").val()) ? $("#searchText").val() : $(".inputBusqueda").val();
-    if (searchText == "") 
+    var searchText = ($("#searchText").val()) ? $("#searchText").val() : $("#inputBusqueda").val();
+    if (searchText == "")
         filtrado = false;
     else
-        filtrado = true;
+    { filtrado = true; filtroTab = false}
 }
  
 
@@ -127,7 +127,9 @@ function ListarPorTipo(tipo, fromTab) {
 
     if (fromTab)
     { $("#DivLibros").html(''); pageIndex = 0; $("#searchText").val(""); $("#inputBusqueda").val(""); }
-    if(tipo == undefined) tipo = filtro
+    if (tipo == undefined)
+        tipo = filtroTab 
+
     $.ajax({
         type: 'POST',
         url: '/Catalogo/ListarPorTipo',
@@ -145,7 +147,7 @@ function ListarPorTipo(tipo, fromTab) {
         },
         complete: function () {
             $("#progress").hide();
-            filtro = tipo;
+            filtroTab = tipo;
         },
         error: function (request, textStatus, error) {
             if (request.readyState == 4) {
